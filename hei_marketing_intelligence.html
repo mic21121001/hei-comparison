@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HEI Competitive Marketing Intelligence — Weekly Tracker</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f8f8f8; color: #1a1a1a; }
+
+.page-header { background: #1a1a2e; color: #fff; padding: 1.5rem 2rem; }
+.page-header h1 { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+.page-header .subtitle { font-size: 11px; color: #aaa; }
+.week-badge { display: inline-block; background: #3a7bd5; color: #fff; font-size: 11px; padding: 3px 10px; border-radius: 12px; margin-top: 8px; }
+
+.section { padding: 1.5rem 2rem; }
+.section-title { font-size: 14px; font-weight: 600; color: #1a1a2e; margin-bottom: 1rem; border-bottom: 2px solid #1a1a2e; padding-bottom: 6px; }
+
+/* AD VOLUME TABLE */
+table.tracker { width: 100%; border-collapse: collapse; font-size: 12px; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+table.tracker th { background: #1a1a2e; color: #fff; padding: 10px 12px; text-align: left; font-size: 11px; font-weight: 500; }
+table.tracker td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+table.tracker tr:last-child td { border-bottom: none; }
+table.tracker tr:hover td { background: #f8f9ff; }
+
+.co-cell { display: flex; align-items: center; gap: 8px; }
+.co-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.dot-unlock { background: #3a7bd5; }
+.dot-point { background: #4CAF50; }
+.dot-hometap { background: #FF9800; }
+.dot-splitero { background: #7c6ff7; }
+.dot-nada { background: #e91e8c; }
+.dot-jgw { background: #FF6B35; }
+.co-name { font-weight: 600; font-size: 12px; }
+
+.num { font-weight: 700; font-size: 14px; }
+.num-big { color: #1a1a2e; }
+.num-med { color: #3a7bd5; }
+.num-small { color: #888; }
+.note { font-size: 10px; color: #888; margin-top: 2px; }
+.channel-badge { display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 3px; font-weight: 500; }
+.ch-google { background: #E8F0FE; color: #1967D2; }
+.ch-meta { background: #E7F3FF; color: #1877F2; }
+.ch-balanced { background: #E8F5E9; color: #2E7D32; }
+.ch-mixed { background: #FFF8E1; color: #E65100; }
+.ch-minimal { background: #F5F5F5; color: #888; }
+
+.trend-up { color: #2E7D32; font-weight: 600; }
+.trend-down { color: #C62828; font-weight: 600; }
+.trend-flat { color: #888; }
+
+/* MESSAGING TABLE */
+table.messaging { width: 100%; border-collapse: collapse; font-size: 11.5px; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+table.messaging th { background: #1a1a2e; color: #fff; padding: 10px 12px; text-align: left; font-size: 11px; font-weight: 500; }
+table.messaging td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; vertical-align: top; font-size: 11px; }
+table.messaging tr:last-child td { border-bottom: none; }
+.msg-theme { display: inline-block; background: #f0f0f8; border: 1px solid #ddd; border-radius: 3px; padding: 2px 6px; font-size: 10px; margin: 2px 2px 2px 0; }
+.msg-primary { background: #E6F1FB; border-color: #b3d4f5; color: #185FA5; font-weight: 600; }
+
+/* VOLUME TABLE */
+table.volume { width: 100%; border-collapse: collapse; font-size: 12px; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+table.volume th { background: #1a1a2e; color: #fff; padding: 10px 12px; text-align: left; font-size: 11px; font-weight: 500; }
+table.volume td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+table.volume tr:last-child td { border-bottom: none; }
+
+.bar-wrap { width: 100%; background: #f0f0f0; border-radius: 4px; height: 8px; margin-top: 4px; }
+.bar { height: 8px; border-radius: 4px; }
+.bar-unlock { background: #3a7bd5; }
+.bar-point { background: #4CAF50; }
+.bar-hometap { background: #FF9800; }
+.bar-splitero { background: #7c6ff7; }
+.bar-nada { background: #e91e8c; }
+.bar-jgw { background: #FF6B35; }
+
+/* INSIGHTS */
+.insights-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.insight-card { background: #fff; border-radius: 8px; padding: 1rem; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-left: 4px solid #3a7bd5; }
+.insight-card.warning { border-left-color: #FF9800; }
+.insight-card.alert { border-left-color: #e91e8c; }
+.insight-card.positive { border-left-color: #4CAF50; }
+.insight-title { font-size: 11px; font-weight: 700; color: #1a1a2e; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+.insight-text { font-size: 11px; color: #444; line-height: 1.5; }
+
+/* WEEKLY LOG */
+.log-entry { background: #fff; border-radius: 8px; padding: 1rem; box-shadow: 0 1px 4px rgba(0,0,0,0.08); margin-bottom: 1rem; border-left: 4px solid #3a7bd5; }
+.log-week { font-size: 11px; font-weight: 700; color: #3a7bd5; margin-bottom: 4px; }
+.log-text { font-size: 11px; color: #444; line-height: 1.5; }
+
+.source-note { font-size: 10px; color: #aaa; margin-top: 6px; font-style: italic; }
+
+/* Bar chart visual */
+.bar-chart { display: flex; align-items: flex-end; gap: 12px; height: 120px; padding: 0 1rem; background: #fff; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); padding: 1rem; }
+.bar-col { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; }
+.bar-visual { width: 100%; border-radius: 4px 4px 0 0; }
+.bar-label { font-size: 10px; font-weight: 600; color: #444; text-align: center; }
+.bar-val { font-size: 10px; color: #888; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>HEI/HEA Competitive Marketing Intelligence</h1>
+  <p class="subtitle">Weekly tracker — Google Ads Transparency Center + Meta Ad Library + Securitization volume</p>
+  <span class="week-badge">Week of July 22, 2026</span>
+</div>
+
+<!-- AD VOLUME SECTION -->
+<div class="section">
+  <div class="section-title">📊 Ad Volume Tracker — Week of July 22, 2026</div>
+  <table class="tracker">
+    <thead>
+      <tr>
+        <th style="width:14%">Company</th>
+        <th style="width:11%">Google Ads (7d)</th>
+        <th style="width:11%">Meta Ads (active)</th>
+        <th style="width:11%">Combined</th>
+        <th style="width:12%">vs Prior Week</th>
+        <th style="width:13%">Primary Channel</th>
+        <th style="width:28%">Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="co-cell"><div class="co-dot dot-unlock"></div><div class="co-name">Unlock</div></div></td>
+        <td><span class="num num-big">~500</span><div class="bar-wrap"><div class="bar bar-unlock" style="width:83%"></div></div></td>
+        <td><span class="num num-med">~160</span><div class="bar-wrap"><div class="bar bar-unlock" style="width:64%"></div></div></td>
+        <td><span class="num num-big">~660</span></td>
+        <td><span class="trend-flat">— baseline</span></td>
+        <td><span class="channel-badge ch-google">Google-dominant</span></td>
+        <td class="note">Pure HEA advertiser. Highest Google spend of any HEA-only company. Messaging focused on credit flexibility and HELOC comparison. All ads started June 2, 2026 — systematic campaign.</td>
+      </tr>
+      <tr>
+        <td><div class="co-cell"><div class="co-dot dot-hometap"></div><div class="co-name">Hometap</div></div></td>
+        <td><span class="num num-big">~300</span><div class="bar-wrap"><div class="bar bar-hometap" style="width:50%"></div></div></td>
+        <td><span class="num num-med">~92</span><div class="bar-wrap"><div class="bar bar-hometap" style="width:37%"></div></div></td>
+        <td><span class="num num-big">~392</span></td>
+        <td><span class="trend-flat">— baseline</span></td>
+        <td><span class="channel-badge ch-google">Google-leaning</span></td>
+        <td class="note">Pure HEI advertiser. Heavy Google presence. Single dominant Meta message: "$600K without monthly payments." HELOC comparison content on Google. Very consistent creative identity.</td>
+      </tr>
+      <tr>
+        <td><div class="co-cell"><div class="co-dot dot-point"></div><div class="co-name">Point</div></div></td>
+        <td><span class="num num-med">75</span><div class="bar-wrap"><div class="bar bar-point" style="width:12%"></div></div></td>
+        <td><span class="num num-big">~250</span><div class="bar-wrap"><div class="bar bar-point" style="width:100%"></div></div></td>
+        <td><span class="num num-big">~325</span></td>
+        <td><span class="trend-flat">— baseline</span></td>
+        <td><span class="channel-badge ch-meta">Meta-dominant</span></td>
+        <td class="note">Highest Meta ad count of any pure HEI company. Heavy video/emotional creative. Leading with "30-year term" and "peace of mind" messaging. Very active A/B testing — multiple versions per ad.</td>
+      </tr>
+      <tr>
+        <td><div class="co-cell"><div class="co-dot dot-splitero"></div><div class="co-name">Splitero</div></div></td>
+        <td><span class="num num-small">50</span><div class="bar-wrap"><div class="bar bar-splitero" style="width:8%"></div></div></td>
+        <td><span class="num num-small">~28</span><div class="bar-wrap"><div class="bar bar-splitero" style="width:11%"></div></div></td>
+        <td><span class="num num-small">~78</span></td>
+        <td><span class="trend-flat">— baseline</span></td>
+        <td><span class="channel-badge ch-minimal">Light — both</span></td>
+        <td class="note">Lightest paid presence of the pure-play HEI companies. 14-state footprint limits addressable audience. May be relying more on broker/wholesale channels. Functional messaging, limited creative investment.</td>
+      </tr>
+      <tr>
+        <td><div class="co-cell"><div class="co-dot dot-nada"></div><div class="co-name">Nada</div></div></td>
+        <td><span class="num num-small">15</span><div class="bar-wrap"><div class="bar bar-nada" style="width:2%"></div></div></td>
+        <td><span class="num num-small">~19</span><div class="bar-wrap"><div class="bar bar-nada" style="width:8%"></div></div></td>
+        <td><span class="num num-small">~34</span></td>
+        <td><span class="trend-up">↑ NEW — Meta launched Jul 21</span></td>
+        <td><span class="channel-badge ch-minimal">Ramping up</span></td>
+        <td class="note">Launched 19 new Meta ads on July 21 — brand new campaign. Worth watching closely. Messaging around retirement, renovation, and transparent pricing. 12-state footprint. Advertiser entity: Cityfunds I, LLC.</td>
+      </tr>
+      <tr>
+        <td><div class="co-cell"><div class="co-dot dot-jgw"></div><div class="co-name">JG Wentworth</div></div></td>
+        <td><span class="num num-small">~600*</span><div class="bar-wrap"><div class="bar bar-jgw" style="width:100%"></div></div></td>
+        <td><span class="num num-small">~81*</span><div class="bar-wrap"><div class="bar bar-jgw" style="width:32%"></div></div></td>
+        <td><span class="num num-small">~681*</span></td>
+        <td><span class="trend-flat">— baseline</span></td>
+        <td><span class="channel-badge ch-mixed">Mixed products*</span></td>
+        <td class="note">*All ads are debt relief, structured settlements, and bankruptcy products — NOT the HEA product. HEA-specific ad presence is negligible. Not a meaningful paid media HEA competitor at this time.</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="source-note">Sources: Google Ads Transparency Center (adstransparency.google.com) + Meta Ad Library (facebook.com/ads/library). Google data = 7-day window. Meta data = all currently active ads. Captured July 22, 2026.</p>
+</div>
+
+<!-- MESSAGING THEMES -->
+<div class="section">
+  <div class="section-title">💬 Messaging Themes by Company — July 22, 2026</div>
+  <table class="messaging">
+    <thead>
+      <tr>
+        <th style="width:12%">Company</th>
+        <th style="width:25%">Primary Message</th>
+        <th style="width:33%">Supporting Themes</th>
+        <th style="width:15%">Social Proof Used</th>
+        <th style="width:15%">Comparison Strategy</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="co-cell"><div class="co-dot dot-unlock"></div><b>Unlock</b></div></td>
+        <td><span class="msg-theme msg-primary">No payments. No refinancing.</span><br><span class="msg-theme msg-primary">Access up to $500K</span></td>
+        <td>
+          <span class="msg-theme">You don't need perfect credit</span>
+          <span class="msg-theme">No income requirements</span>
+          <span class="msg-theme">Get pre-qualified in minutes</span>
+          <span class="msg-theme">Zero catch</span>
+          <span class="msg-theme">Access equity without a HELOC</span>
+          <span class="msg-theme">Now funding in [state]</span>
+        </td>
+        <td>4.8★ (1,392 reviews)<br>15,000+ homeowners</td>
+        <td>Heavy HELOC vs HEA comparison. "4 reasons a HELOC may not be right for you." Educational intercept strategy.</td>
+      </tr>
+      <tr>
+        <td><div class="co-cell"><div class="co-dot dot-point"></div><b>Point</b></div></td>
+        <td><span class="msg-theme msg-primary">Turn your equity into peace of mind</span><br><span class="msg-theme msg-primary">30-year term, no perfect FICO</span></td>
+        <td>
+          <span class="msg-theme">No monthly payments</span>
+          <span class="msg-theme">No income requirements</span>
+          <span class="msg-theme">500+ credit score</span>
+          <span class="msg-theme">Your home can send cash your way</span>
+          <span class="msg-theme">Prequalify risk free</span>
+          <span class="msg-theme">$2B+ funded</span>
+        </td>
+        <td>$2B+ funded milestone<br>25,000+ homeowners</td>
+        <td">Soft — "Your home can send cash your way." More emotional/aspirational than competitive. Leading with 30-year term as key differentiator.</td>
+      </tr>
+      <tr>
+        <td><div class="co-cell"><div class="co-dot dot-hometap"></div><b>Hometap</b></div></td>
+        <td><span class="msg-theme msg-primary">Get up to $600K without monthly payments</span><br><span class="msg-theme msg-primary">A refinance/loan alternative</span></td>
+        <td>
+          <span class="msg-theme">No debt</span>
+          <span class="msg-theme">Tap into your home's equity</span>
+          <span class="msg-theme">Prequalify in minutes</span>
+          <span class="msg-theme">Use funds your way</span>
+          <span class="msg-theme">No stress</span>
+        </td>
+        <td>4.9★ (2,071 reviews)<br>Most reviews of any company</td>
+        <td>Direct HELOC intercept. "This is why I didn't get a HELOC." Side-by-side HELOC vs HEI comparison graphic. "Our HEI vs. a loan" ad extension.</td>
+      </tr>
+      <tr>
+        <td><div class="co-cell"><div class="co-dot dot-splitero"></div><b>Splitero</b></div></td>
+        <td><span class="msg-theme msg-primary">Get cash up front for a share of your home's future value</span></td>
+        <td>
+          <span class="msg-theme">No income requirements</span>
+          <span class="msg-theme">500 min credit score</span>
+          <span class="msg-theme">No monthly payments</span>
+          <span class="msg-theme">Keep your home</span>
+          <span class="msg-theme">Ditch the HELOC</span>
+        </td>
+        <td>Customer testimonials (limited)<br>"What customers are saying"</td>
+        <td">"Get an HEI, Not a HELOC." Basic HELOC comparison but less developed than Unlock or Hometap.</td>
+      </tr>
+      <tr>
+        <td><div class="co-cell"><div class="co-dot dot-nada"></div><b>Nada</b></div></td>
+        <td><span class="msg-theme msg-primary">Get Cash with No Loan</span><br><span class="msg-theme msg-primary">Home equity solutions that work for you, not against you</span></td>
+        <td>
+          <span class="msg-theme">No income requirements</span>
+          <span class="msg-theme">No monthly payments</span>
+          <span class="msg-theme">Transparent pricing</span>
+          <span class="msg-theme">Retire on your home's terms</span>
+          <span class="msg-theme">Keep your low mortgage rate</span>
+          <span class="msg-theme">No credit impact to check offer</span>
+        </td>
+        <td>4.9★ (107–132 reviews)<br>Smallest review base</td>
+        <td>Not leading with comparison. Consumer-advocacy framing — "solutions that work for you, not against you." Retirement and renovation use-case specific.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ORIGINATION VOLUME -->
+<div class="section">
+  <div class="section-title">🏦 Origination Volume — From Securitization Filings & Public Disclosures</div>
+  <table class="volume">
+    <thead>
+      <tr>
+        <th style="width:12%">Company</th>
+        <th style="width:18%">Total Originated (inception)</th>
+        <th style="width:18%">Total Homeowners Served</th>
+        <th style="width:22%">Most Recent Securitization</th>
+        <th style="width:15%">2026 Run Rate (est.)</th>
+        <th style="width:15%">Avg Deal Size (est.)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="co-cell"><div class="co-dot dot-point"></div><b>Point</b></div></td>
+        <td><b>$2.5B+</b><div class="bar-wrap"><div class="bar bar-point" style="width:100%"></div></div></td>
+        <td>25,000+</td>
+        <td>$508.6M — Jul 15, 2026 (largest ever HEI securitization). 8th rated deal. 30+ institutional investors.</td>
+        <td><b>$850M+ H1 2026</b><div class="note">2 deals: $346M (Feb) + $508M (Jul)</div></td>
+        <td>~$100K/deal est.</td>
+      </tr>
+      <tr>
+        <td><div class="co-cell"><div class="co-dot dot-hometap"></div><b>Hometap</b></div></td>
+        <td><b>$2.3B+</b><div class="bar-wrap"><div class="bar bar-hometap" style="width:92%"></div></div></td>
+        <td>22,000+</td>
+        <td>$300M — Aug 29, 2025 (5th securitization). 2026 deal not yet announced.</td>
+        <td><b>~$300–400M est.</b><div class="note">~2 deals/year pace in 2025</div></td>
+        <td>~$105K/deal est.</td>
+      </tr>
+      <tr>
+        <td><div class="co-cell"><div class="co-dot dot-unlock"></div><b>Unlock</b></div></td>
+        <td><b>~$2B</b><div class="bar-wrap"><div class="bar bar-unlock" style="width:80%"></div></div></td>
+        <td>20,000+</td>
+        <td>$358.5M — May 21, 2026 (UNLOK 2026-1). 3,546 HEAs in pool. 8th deal overall.</td>
+        <td><b>$358M+ (1 deal so far)</b><div class="note">3 deals in 2025 totaling ~$900M</div></td>
+        <td>~$101K/deal<div class="note">From UNLOK 2026-1 pool data</div></td>
+      </tr>
+      <tr>
+        <td><div class="co-cell"><div class="co-dot dot-splitero"></div><b>Splitero</b></div></td>
+        <td><b>Not disclosed</b><div class="bar-wrap"><div class="bar bar-splitero" style="width:20%"></div></div></td>
+        <td>Not disclosed</td>
+        <td>$296M — May 27, 2026 (Splitero Trust 2026-1). 2,246 contracts. First public securitization.</td>
+        <td><b>$296M (1 deal)</b><div class="note">First securitization — newer entrant</div></td>
+        <td>~$132K/deal<div class="note">Highest avg — targeting higher-value homes</div></td>
+      </tr>
+      <tr>
+        <td><div class="co-cell"><div class="co-dot dot-nada"></div><b>Nada</b></div></td>
+        <td><b>Not disclosed</b><div class="bar-wrap"><div class="bar bar-nada" style="width:5%"></div></div></td>
+        <td>Not disclosed</td>
+        <td>No securitization announced. Pre-institutional scale.</td>
+        <td><b>Not estimable</b></td>
+        <td>Not estimable</td>
+      </tr>
+      <tr>
+        <td><div class="co-cell"><div class="co-dot dot-jgw"></div><b>JG Wentworth</b></div></td>
+        <td><b>Not disclosed</b><div class="bar-wrap"><div class="bar bar-jgw" style="width:5%"></div></div></td>
+        <td>Not disclosed</td>
+        <td>No HEA securitization announced. Product appears early stage.</td>
+        <td><b>Not estimable</b></td>
+        <td>Not estimable</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="source-note">Sources: Morningstar DBRS presale reports, company press releases, Asset Securitization Report, HousingWire, National Mortgage News. All securitization data from public filings.</p>
+</div>
+
+<!-- KEY INSIGHTS -->
+<div class="section">
+  <div class="section-title">💡 Key Insights — Week of July 22, 2026</div>
+  <div class="insights-grid">
+    <div class="insight-card positive">
+      <div class="insight-title">🥇 Unlock Owns Google Search</div>
+      <div class="insight-text">With ~500 Google ads in 7 days, Unlock runs nearly 7x more Google ads than Point and 1.7x more than Hometap. Unlock is capturing homeowners at the moment of active search intent — the highest-value acquisition moment in the funnel.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-title">📱 Point Owns Meta Social</div>
+      <div class="insight-text">Point runs ~250 active Meta ads vs Unlock's 160 — building awareness upstream of search intent. Their emotional/video creative ("peace of mind", "your home can send cash your way") is more sophisticated than any competitor on social.</div>
+    </div>
+    <div class="insight-card warning">
+      <div class="insight-title">⚠️ Hometap Has Most Social Proof</div>
+      <div class="insight-text">Hometap leads on reviews with 4.9★ from 2,071 verified reviews — more than any competitor. They're actively showing this in ads. Unlock shows 4.8★ from 1,392. Review count is a meaningful trust signal at this stage of consumer education.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-title">📈 Point Is Dominant on Volume</div>
+      <div class="insight-text">Point's $508.6M July 2026 securitization is the largest HEI deal in history. Their H1 2026 securitized volume of $850M+ significantly outpaces all competitors. Point's 2025 growth was 3x year-over-year per their own press releases.</div>
+    </div>
+    <div class="insight-card alert">
+      <div class="insight-title">🆕 Nada Just Launched Meta</div>
+      <div class="insight-text">Nada launched 19 new Meta ads on July 21 — one day ago. This is a signal of increased marketing investment worth monitoring. Their "transparent pricing" and retirement-focused messaging is differentiated. Watch for Google ramp-up in coming weeks.</div>
+    </div>
+    <div class="insight-card warning">
+      <div class="insight-title">🔍 JGW Not a Real Paid Media Competitor</div>
+      <div class="insight-text">Despite ~600 Google ads and ~81 Meta ads, JGW's entire paid media presence is debt relief and structured settlements — not HEA. Their HEA product has essentially no paid media footprint at this time. Not a meaningful digital marketing competitor.</div>
+    </div>
+  </div>
+</div>
+
+<!-- WEEKLY LOG -->
+<div class="section">
+  <div class="section-title">📅 Weekly Change Log</div>
+
+  <div class="log-entry">
+    <div class="log-week">Week of July 22, 2026 — Baseline</div>
+    <div class="log-text">
+      <b>First week of tracking.</b> Baseline established for all six companies across Google Ads Transparency Center and Meta Ad Library. Key findings: Unlock dominates Google search (500 ads), Point dominates Meta social (250 ads), Hometap is strong on both (300 Google / 92 Meta), Splitero is light, Nada just launched Meta campaign, JGW not an HEA paid media competitor. Origination volume data pulled from securitization filings — Point leads with $850M+ in H1 2026. Unlock at $358M+ from one deal. Hometap at $2.3B+ cumulative.
+    </div>
+  </div>
+
+  <div class="log-entry" style="border-left-color: #ddd; opacity: 0.5;">
+    <div class="log-week">Week of July 29, 2026 — [To be completed]</div>
+    <div class="log-text">Update Google and Meta ad counts for all companies. Note any new campaigns, messaging changes, or significant volume shifts. Check for new securitization announcements.</div>
+  </div>
+
+  <div class="log-entry" style="border-left-color: #ddd; opacity: 0.5;">
+    <div class="log-week">Week of August 5, 2026 — [To be completed]</div>
+    <div class="log-text">Update Google and Meta ad counts for all companies. Note any new campaigns, messaging changes, or significant volume shifts. Check for new securitization announcements.</div>
+  </div>
+
+</div>
+
+<!-- HOW TO UPDATE -->
+<div class="section">
+  <div class="section-title">🔄 How to Update This Tracker Weekly</div>
+  <table class="volume">
+    <thead>
+      <tr><th>Step</th><th>Action</th><th>Where</th><th>Takes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><b>1</b></td><td>Search each company domain, screenshot the ad count and top ads</td><td>adstransparency.google.com — filter to "Last 7 days"</td><td>~10 min</td></tr>
+      <tr><td><b>2</b></td><td>Search each company domain, screenshot active ad count and top ads</td><td>facebook.com/ads/library — filter to "Active ads", United States</td><td>~10 min</td></tr>
+      <tr><td><b>3</b></td><td>Check for new securitization announcements</td><td>Search "[company name] securitization 2026" on Google News</td><td>~5 min</td></tr>
+      <tr><td><b>4</b></td><td>Share screenshots with Claude and ask for updated HTML file</td><td>This chat</td><td>~5 min</td></tr>
+      <tr><td><b>5</b></td><td>Upload new index.html to GitHub — Notion embed auto-refreshes</td><td>github.com/mic21121001/hei-comparison</td><td>~2 min</td></tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>
