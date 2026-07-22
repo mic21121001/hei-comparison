@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HEI Comparison Table — Unlock, Point, Hometap, Splitero, Nada, JG Wentworth</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fff; color: #1a1a1a; }
+  .page-header { padding: 1.5rem 2rem 1rem; border-bottom: 1px solid #e5e5e5; }
+  h1 { font-size: 17px; font-weight: 600; margin-bottom: 4px; }
+  .subtitle { font-size: 11px; color: #888; }
+  .table-container { overflow-x: auto; overflow-y: auto; max-height: calc(100vh - 80px); }
+  table { width: 100%; border-collapse: collapse; font-size: 11.5px; table-layout: fixed; min-width: 900px; }
+
+  /* Sticky header row */
+  thead th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #1a1a2e;
+    color: #fff;
+    font-weight: 600;
+    font-size: 11px;
+    padding: 10px 10px;
+    text-align: left;
+    border-right: 1px solid #2d2d4e;
+    letter-spacing: 0.02em;
+  }
+  thead th:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 20;
+    background: #1a1a2e;
+    border-right: 2px solid #4a4a8a;
+  }
+
+  /* Sticky first column */
+  td:first-child, th:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 5;
+  }
+  td:first-child {
+    background: #f0f0f8;
+    font-weight: 600;
+    color: #333;
+    font-size: 11px;
+    border-right: 2px solid #d0d0e8;
+    z-index: 5;
+  }
+
+  td {
+    padding: 9px 10px;
+    text-align: left;
+    border: 0.5px solid #e0e0e0;
+    vertical-align: top;
+    word-wrap: break-word;
+    background: #fff;
+  }
+
+  tr:nth-child(even) td { background: #fafafa; }
+  tr:nth-child(even) td:first-child { background: #ebebf5; }
+
+  .highlight-row td { background: #EEF6FF !important; }
+  .highlight-row td:first-child { background: #dceeff !important; }
+  .danger-row td { background: #FFF5F5 !important; }
+  .danger-row td:first-child { background: #ffe0e0 !important; }
+  .warn-row td { background: #FFFBF0 !important; }
+  .warn-row td:first-child { background: #fff0cc !important; }
+
+  .co-name { font-size: 12px; font-weight: 700; color: #fff; display: block; margin-bottom: 3px; }
+  .co-tag { display: inline-block; font-size: 9px; padding: 2px 6px; border-radius: 3px; font-weight: 500; }
+  .tag-unlock { background: #3a7bd5; color: #fff; }
+  .tag-point { background: #4CAF50; color: #fff; }
+  .tag-hometap { background: #FF9800; color: #fff; }
+  .tag-splitero { background: #7c6ff7; color: #fff; }
+  .tag-nada { background: #e91e8c; color: #fff; }
+  .tag-jgw { background: #FF6B35; color: #fff; }
+
+  .cell-val { color: #1a1a1a; line-height: 1.5; font-size: 11.5px; font-weight: 500; }
+  .cell-note { font-size: 10px; color: #666; margin-top: 3px; line-height: 1.4; font-weight: 400; }
+  .src { font-size: 9px; color: #aaa; margin-top: 3px; font-style: italic; }
+
+  .badge { display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 3px; font-weight: 600; }
+  .badge-yes { background: #E8F5E9; color: #2E7D32; border: 1px solid #A5D6A7; }
+  .badge-no { background: #FFEBEE; color: #C62828; border: 1px solid #EF9A9A; }
+  .badge-warn { background: #FFF8E1; color: #E65100; border: 1px solid #FFCC80; }
+  .badge-danger { background: #FFEBEE; color: #C62828; border: 1px solid #EF9A9A; }
+  .badge-neutral { background: #F5F5F5; color: #555; border: 1px solid #ddd; }
+  .badge-3p { background: #EDE7F6; color: #4527A0; font-size: 9px; padding: 1px 5px; border-radius: 3px; border: 1px solid #B39DDB; }
+
+  .key-tag { display: inline-block; font-size: 9px; padding: 1px 5px; border-radius: 3px; background: #3a7bd5; color: #fff; margin-left: 4px; vertical-align: middle; }
+  .compound-tag { display: inline-block; font-size: 9px; padding: 1px 5px; border-radius: 3px; background: #FF9800; color: #fff; margin-left: 4px; vertical-align: middle; }
+
+  .legend { padding: 1rem 2rem; font-size: 10px; color: #888; display: flex; gap: 1.5rem; flex-wrap: wrap; border-top: 1px solid #eee; }
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+
+  col.c1 { width: 13%; }
+  col.c2 { width: 15%; }
+  col.c3 { width: 15%; }
+  col.c4 { width: 15%; }
+  col.c5 { width: 15%; }
+  col.c6 { width: 14%; }
+  col.c7 { width: 13%; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Home Equity Investment / Agreement Comparison</h1>
+  <p class="subtitle">Sources: brand websites (primary), internal documentation, and third-party reviews (tagged). Last updated July 2026. Scroll right to see all companies. Headers and row labels are frozen.</p>
+</div>
+
+<div class="table-container">
+<table>
+<colgroup><col class="c1"><col class="c2"><col class="c3"><col class="c4"><col class="c5"><col class="c6"><col class="c7"></colgroup>
+<thead>
+<tr>
+  <th></th>
+  <th><span class="co-name">Unlock</span><span class="co-tag tag-unlock">HEA</span></th>
+  <th><span class="co-name">Point</span><span class="co-tag tag-point">HEI</span></th>
+  <th><span class="co-name">Hometap</span><span class="co-tag tag-hometap">HEI</span></th>
+  <th><span class="co-name">Splitero</span><span class="co-tag tag-splitero">HEI</span></th>
+  <th><span class="co-name">Nada</span><span class="co-tag tag-nada">HEA</span></th>
+  <th><span class="co-name">JG Wentworth</span><span class="co-tag tag-jgw">HEA</span></th>
+</tr>
+</thead>
+<tbody>
+
+<tr class="highlight-row">
+  <td>Credit pull <span class="key-tag">key differentiator</span></td>
+  <td><div class="cell-val"><span class="badge badge-yes">Soft pull only</span></div><div class="cell-note">No hard pull at any stage — including full application. Zero credit score impact. Unconditional.</div><div class="src">unlock.com/legal/credit-authorization</div></td>
+  <td><div class="cell-val"><span class="badge badge-warn">Soft then hard</span></div><div class="cell-note">Soft at prequalify. Hard pull at full application — recorded on credit history, may impact score.</div><div class="src">point.com/credit-report-policy</div></td>
+  <td><div class="cell-val"><span class="badge badge-warn">Soft then hard</span></div><div class="cell-note">Soft at pre-qualification. Hard pull at formal application — recorded on credit history, may impact score.</div><div class="src">hometap.com/legal + adverse action notice</div></td>
+  <td><div class="cell-val"><span class="badge badge-warn">Soft then hard</span></div><div class="cell-note">Soft at prequalify. Hard pull at application submission — recorded on credit history, may impact score.</div><div class="src">splitero.com/credit-report-policy</div></td>
+  <td><div class="cell-val"><span class="badge badge-warn">Soft / conditional hard</span></div><div class="cell-note">"In certain situations, a hard credit inquiry may be necessary; however, Nada always seeks your consent." Soft in most cases but hard pull explicitly possible — unlike Unlock where no hard pull occurs under any circumstance.</div><div class="src">nada.co/frequently-asked-questions</div></td>
+  <td><div class="cell-val"><span class="badge badge-warn">Soft then hard</span></div><div class="cell-note">Soft at prequalify. Hard pull only after initial estimate received and homeowner gives explicit approval to proceed.</div><div class="src">jgwentworth.com/home-equity-cashout-faqs</div></td>
+</tr>
+
+<tr>
+  <td>Advertised funding speed</td>
+  <td><div class="cell-val">30–60 days total<br>Funded within 3 days of signing</div><div class="cell-note">"Get funded within three days of signing your closing documents." Overall process typically 30–60 days, subject to appraisal timing.</div><div class="src">unlock.com/how-it-works + unlock.com/faqs</div></td>
+  <td><div class="cell-val">As little as 3 weeks</div><div class="cell-note">"Motivated homeowners can close in as little as 3 weeks." Timeline varies based on responsiveness, debt obligations, and appraisal scheduling.</div><div class="src">point.com/hei/how-hei-works</div></td>
+  <td><div class="cell-val">30–45 days total<br>Funded 4–7 days after signing</div><div class="cell-note">"The entire process can take as little as 30–45 days." Funding arrives via wire transfer within four to seven business days of signing — after mandatory 3-day rescission period.</div><div class="src">hometap.com + hometap.com/faqs</div></td>
+  <td><div class="cell-val">As little as 10 days (advertised); 2–4 weeks typical</div><div class="cell-note">"From application to funded in as little as 10 days" per their own site. Third-party reviews put realistic range at 2–4 weeks for straightforward files.</div><div class="src">splitero.com/how-it-works; LendEDU, WalletGrower 2026</div></td>
+  <td><div class="cell-val">As little as 2 weeks</div><div class="cell-note">"Unlock your equity in as little as 2 weeks." Timeline starts once completed application and all documents submitted; assumes AVM appraisal and no undisclosed liens.</div><div class="src">nada.co/homeshares (footnote confirmed)</div></td>
+  <td><div class="cell-val">2–3 weeks (industry avg cited)</div><div class="cell-note">JGW's own resources note "HEA providers frequently close deals in two to three weeks" but do not publish a JGW-specific HEA funding timeline.</div><div class="src">jgwentworth.com/resources/what-is-a-home-equity-agreement</div></td>
+</tr>
+
+<tr class="warn-row">
+  <td>Annual cost cap <span class="compound-tag">compounding matters</span></td>
+  <td><div class="cell-val">19.9% simple annual</div><div class="cell-note">No compounding. Effective rate = 19.9%. Most transparent of the six — what you see is what you pay.</div><div class="src">unlock.com/what-it-costs</div></td>
+  <td><div class="cell-val">~18% nominal, compounded monthly</div><div class="cell-note">Rate not published — set at underwriting. Monthly compounding = effective annual ~19.6%.</div><div class="src">help.point.com/article/135</div></td>
+  <td><div class="cell-val">18.5% nominal, compounded monthly</div><div class="cell-note">Sounds lower than Unlock's 19.9% but monthly compounding = effective annual ~20.2% — highest of the six.</div><div class="src">hometap.com press release, June 16, 2026</div></td>
+  <td><div class="cell-val">17.99% nominal, compounded monthly</div><div class="cell-note">"Safety Cap." Monthly compounding = effective annual ~19.6% — similar to Unlock's simple 19.9%.</div><div class="src">splitero.com/pricing (screenshot confirmed)</div></td>
+  <td><div class="cell-val">19.99% simple annual</div><div class="cell-note">"Capped at 19.99% per year." Simple annual — no compounding language on their pricing page.</div><div class="src">nada.co/pricing</div></td>
+  <td><div class="cell-val">19.99% simple annual</div><div class="cell-note">"You'll never owe more than 19.99% annualized." Simple annual, no compounding mentioned.</div><div class="src">jgwentworth.com/home-equity-cashout-faqs</div></td>
+</tr>
+
+<tr>
+  <td>Exchange rate / multiplier</td>
+  <td><div class="cell-val">1.75× – 2.05×</div><div class="cell-note">Most common (1st lien, primary): 1.75×. Varies by lien, THF band, property type. Third-party reviews citing 2.0× are outdated.</div><div class="src">unlock.com/what-it-costs + internal v25 pricing grid</div></td>
+  <td><div class="cell-val">HEI % set at underwriting</div><div class="cell-note">No published multiplier. Own example: 10% investment → 24% appreciation share above discounted starting value.</div><div class="src">point.com/blog/share-of-value-vs-share-of-appreciation</div></td>
+  <td><div class="cell-val">1.65× (yrs 0–5) / 1.80× (yrs 6–10)</div><div class="cell-note">Updated June 2026. Simplified from prior 3-tier structure. Depreciation always uses 1.65×.</div><div class="src">hometap.com press release, June 16, 2026</div></td>
+  <td><div class="cell-val">~2.00× <span class="badge-3p">3rd party</span></div><div class="cell-note">Not published publicly. Based on securitization data and third-party reviews. Splitero's pricing opacity is itself a consumer risk.</div><div class="src">HELN News; LendEDU, MoneyAtlas 2026</div></td>
+  <td><div class="cell-val">1.85× (standard)</div><div class="cell-note">"Exchange rate starts at 1.85." Most transparently published rate of the six. Access 10% → Nada receives 18.5% of future home value.</div><div class="src">nada.co/pricing</div></td>
+  <td><div class="cell-val">2.00×</div><div class="cell-note">"If you receive a $50K Cashout (10% of $500K home), we receive up to 20%." Explicitly stated in FAQ.</div><div class="src">jgwentworth.com/home-equity-cashout-faqs</div></td>
+</tr>
+
+<tr>
+  <td>Term length</td>
+  <td><div class="cell-val">10 years (standard)</div><div class="cell-note">30-year co-term option referenced but not fully detailed in public docs.</div><div class="src">unlock.com/faqs</div></td>
+  <td><div class="cell-val">30 years</div><div class="cell-note">No monthly payments. No prepayment penalty.</div><div class="src">point.com/hei</div></td>
+  <td><div class="cell-val">10 years (firm)</div><div class="cell-note">"The effective period of a Hometap Investment is 10 years."</div><div class="src">hometap.com/how-it-works</div></td>
+  <td><div class="cell-val">10–30 years (co-term) <span class="badge-3p">3rd party</span></div><div class="cell-note">Term runs as long as senior mortgage — min 10 years, max 30 years. No prepayment penalty.</div><div class="src">SuperMoney, LendEDU, MoneyAtlas 2026</div></td>
+  <td><div class="cell-val">10 years</div><div class="cell-note">Can renew into a new 10-year HEA at expiry.</div><div class="src">nada.co/pricing</div></td>
+  <td><div class="cell-val">10 years</div><div class="cell-note">Must settle by year 10 or JGW may become co-owner of property.</div><div class="src">jgwentworth.com/home-equity-cashout-faqs</div></td>
+</tr>
+
+<tr>
+  <td>Origination fee</td>
+  <td><div class="cell-val">4.9%</div><div class="cell-note">Deducted at closing.</div><div class="src">unlock.com/faqs</div></td>
+  <td><div class="cell-val">Up to 3.9%, min $2,000</div><div class="cell-note">Plus third-party costs (appraisal, escrow, gov fees). Lowest published fee of the six.</div><div class="src">point.com/hei legal footnote</div></td>
+  <td><div class="cell-val">4.5%, max $20,000</div><div class="cell-note">Plus appraisal, escrow, attorney/notary, title, recording fees.</div><div class="src">hometap.com/faqs</div></td>
+  <td><div class="cell-val">4.99%, min $1,500 <span class="badge-3p">3rd party</span></div><div class="cell-note">Plus escrow/title ($500–$1,500), appraisal ($200–$700), credit report fee. All deducted from payout.</div><div class="src">LendEDU, MoneyAtlas, themortgagereports.com 2026</div></td>
+  <td><div class="cell-val">4%–5%, plus $500–$1,000</div><div class="cell-note">Total 4%–7% of amount accessed. All deducted from proceeds.</div><div class="src">nada.co/pricing</div></td>
+  <td><div class="cell-val">4.99%</div><div class="cell-note">Plus third-party transaction expenses (appraisal, title, credit, escrow). Highest alongside Splitero.</div><div class="src">jgwentworth.com/how-it-works-home-equity-agreement</div></td>
+</tr>
+
+<tr class="danger-row">
+  <td>Home value discount</td>
+  <td><div class="cell-val"><span class="badge badge-yes">No discount</span></div><div class="cell-note">"Unlock does not ever apply a discount to the home value determined by our valuation process."</div><div class="src">unlock.com/faqs</div></td>
+  <td><div class="cell-val"><span class="badge badge-danger">Up to 27% discount applied</span></div><div class="cell-note">Point heavily discounts your home's value at the start of the agreement — by up to 27%. Own example: $800K home discounted to $584K starting value. Your home must appreciate significantly before you break even.</div><div class="src">point.com/blog/share-of-value-vs-share-of-appreciation</div></td>
+  <td><div class="cell-val"><span class="badge badge-yes">No discount</span></div><div class="cell-note">Full appraised value used at settlement. No starting value discount applied.</div><div class="src">hometap.com/blog/how-hometap-pricing-works</div></td>
+  <td><div class="cell-val"><span class="badge badge-neutral">Not confirmed</span></div><div class="cell-note">No third-party source mentions a risk adjustment for Splitero. Likely none but cannot confirm from primary source.</div><div class="src">Multiple 2026 reviews — none mention discount</div></td>
+  <td><div class="cell-val"><span class="badge badge-yes">No discount</span></div><div class="cell-note">"Tied to the change in your home's value from the starting appraised value." Full appraisal used as baseline.</div><div class="src">nada.co/pricing</div></td>
+  <td><div class="cell-val"><span class="badge badge-yes">No discount</span></div><div class="cell-note">Full appraised value used — no risk adjustment or discount mentioned in any docs.</div><div class="src">jgwentworth.com/home-equity-cashout-faqs</div></td>
+</tr>
+
+<tr>
+  <td>Pricing model</td>
+  <td><div class="cell-val">Share of home value</div><div class="cell-note">Pay Unlock % × ending home value at settlement.</div><div class="src">unlock.com/what-it-costs</div></td>
+  <td><div class="cell-val">Share of appreciation</div><div class="cell-note">Pay original investment + Point's % of appreciation above the discounted starting value. Effective share of gains substantially higher than headline %.</div><div class="src">point.com/hei/how-hei-works</div></td>
+  <td><div class="cell-val">Share of home value</div><div class="cell-note">Hometap receives agreed % of home's full future value at settlement.</div><div class="src">hometap.com/blog/how-hometap-pricing-works</div></td>
+  <td><div class="cell-val">Share of appreciation <span class="badge-3p">3rd party</span></div><div class="cell-note">Receives a share of appreciation from starting appraised value — not total home value.</div><div class="src">WalletGrower, topmoneyhub.com 2026</div></td>
+  <td><div class="cell-val">Share of home value</div><div class="cell-note">"Nada receives a percentage share of your home's future value."</div><div class="src">nada.co/pricing</div></td>
+  <td><div class="cell-val">Share of home value</div><div class="cell-note">"JGW's Share" = % of home's future value at settlement.</div><div class="src">jgwentworth.com/home-equity-cashout-faqs</div></td>
+</tr>
+
+<tr>
+  <td>Partial buyback</td>
+  <td><div class="cell-val"><span class="badge badge-yes">Yes</span></div><div class="cell-note">Any time during the term. No limit on number of transactions.</div><div class="src">unlock.com/faqs</div></td>
+  <td><div class="cell-val"><span class="badge badge-no">No</span></div><div class="cell-note">"You'll need to repay your HEI in one lump sum."</div><div class="src">point.com/hei/how-hei-works</div></td>
+  <td><div class="cell-val"><span class="badge badge-no">No</span></div><div class="cell-note">Full settlement only — no partial repurchase mentioned in docs.</div><div class="src">hometap.com</div></td>
+  <td><div class="cell-val"><span class="badge badge-no">No <span class="badge-3p">3rd party</span></span></div><div class="cell-note">Full settlement only. No prepayment penalty.</div><div class="src">LendEDU, topmoneyhub.com 2026</div></td>
+  <td><div class="cell-val"><span class="badge badge-no">No</span></div><div class="cell-note">Full buyout only. No prepayment penalty.</div><div class="src">nada.co/eligibility</div></td>
+  <td><div class="cell-val"><span class="badge badge-yes">Yes</span></div><div class="cell-note">Partial payments allowed any time with 45 days notice. Each payment reduces JGW's share proportionally.</div><div class="src">jgwentworth.com/home-equity-cashout-faqs</div></td>
+</tr>
+
+<tr>
+  <td>Max investment</td>
+  <td><div class="cell-val">$500,000</div><div class="cell-note">Up to 49.9% equity share. Min $15,000.</div><div class="src">unlock.com/faqs</div></td>
+  <td><div class="cell-val">$600,000</div><div class="cell-note">Min $30,000. Highest ceiling of the six.</div><div class="src">point.com/hei</div></td>
+  <td><div class="cell-val">$600,000</div><div class="cell-note">Max 24.99% of home value. Min $15,000.</div><div class="src">hometap.com/how-it-works</div></td>
+  <td><div class="cell-val">$600,000</div><div class="cell-note">Up to 25% of home value. Min $50,000. Home value $200K–$5M. Min 30% equity.</div><div class="src">Splitero marketing documentation</div></td>
+  <td><div class="cell-val">$500,000 (primary/2nd)<br>$100,000 (investment)</div><div class="cell-note">Max 30% of home value. Min $20,000.</div><div class="src">nada.co/eligibility</div></td>
+  <td><div class="cell-val">$400,000</div><div class="cell-note">Generally 10–20% of home value. Min $15,000. Min home value $150,000. Lowest ceiling of the six.</div><div class="src">jgwentworth.com/home-equity-cashout-faqs</div></td>
+</tr>
+
+<tr>
+  <td>Min credit score</td>
+  <td><div class="cell-val">500</div><div class="src">unlock.com/faqs</div></td>
+  <td><div class="cell-val">500+</div><div class="src">point.com/hei</div></td>
+  <td><div class="cell-val">575</div><div class="src">Hometap marketing documentation</div></td>
+  <td><div class="cell-val">500 <span class="badge-3p">3rd party</span></div><div class="src">LendEDU, MoneyAtlas, SuperMoney 2026</div></td>
+  <td><div class="cell-val">500 (primary/2nd)<br>720 (investment)</div><div class="src">nada.co/eligibility</div></td>
+  <td><div class="cell-val">600</div><div class="cell-note">Highest minimum for primary residences of the six.</div><div class="src">jgwentworth.com/home-equity-cashout-faqs</div></td>
+</tr>
+
+<tr>
+  <td>Renovation credit</td>
+  <td><div class="cell-val"><span class="badge badge-yes">Yes</span></div><div class="cell-note">Improvement Adjustment available — qualifying renovations excluded from appreciation share.</div><div class="src">unlock.com/faqs</div></td>
+  <td><div class="cell-val"><span class="badge badge-yes">Yes</span></div><div class="cell-note">Home improvement credit adjusts ending value so Point doesn't share in self-funded increases.</div><div class="src">point.com/hei/how-hei-works</div></td>
+  <td><div class="cell-val"><span class="badge badge-yes">Yes</span></div><div class="cell-note">Renovation adjustment confirmed in FAQ.</div><div class="src">hometap.com/faqs</div></td>
+  <td><div class="cell-val"><span class="badge badge-yes">Yes <span class="badge-3p">3rd party</span></span></div><div class="cell-note">Adjusts ending value for eligible home improvements.</div><div class="src">SuperMoney 2026</div></td>
+  <td><div class="cell-val"><span class="badge badge-neutral">Not published</span></div><div class="cell-note">No renovation adjustment policy mentioned on nada.co.</div><div class="src">nada.co</div></td>
+  <td><div class="cell-val"><span class="badge badge-yes">Yes</span></div><div class="cell-note">Remodeling adjustment available. Must increase property value by at least $25,000.</div><div class="src">jgwentworth.com/home-equity-cashout-faqs</div></td>
+</tr>
+
+<tr>
+  <td>Rental / investment property</td>
+  <td><div class="cell-val"><span class="badge badge-yes">Yes</span></div><div class="cell-note">Primary, 2nd home, and rental properties eligible. Higher exchange rate applies for rentals per v25 grid.</div><div class="src">unlock.com/faqs</div></td>
+  <td><div class="cell-val"><span class="badge badge-yes">Yes</span></div><div class="cell-note">Investment properties and second homes are eligible.</div><div class="src">help.point.com/article/42</div></td>
+  <td><div class="cell-val"><span class="badge badge-no">No</span></div><div class="cell-note">Primary residences and owner-occupied only.</div><div class="src">hometap.com/how-it-works</div></td>
+  <td><div class="cell-val"><span class="badge badge-no">No <span class="badge-3p">3rd party</span></span></div><div class="cell-note">Owner-occupied only — no investment or rental properties.</div><div class="src">LendEDU, MoneyAtlas 2026</div></td>
+  <td><div class="cell-val"><span class="badge badge-yes">Yes</span></div><div class="cell-note">Investment properties eligible but capped at $100K, require 720 credit score.</div><div class="src">nada.co/eligibility</div></td>
+  <td><div class="cell-val"><span class="badge badge-no">No</span></div><div class="cell-note">Primary and second homes only. Investment properties not eligible.</div><div class="src">jgwentworth.com/home-equity-cashout-faqs</div></td>
+</tr>
+
+<tr>
+  <td>State availability</td>
+  <td><div class="cell-val">26 states</div><div class="cell-note">AL, AZ, CA, FL, HI, ID, IN, KY, MI, MO, MT, NV, NH, NJ, NM, NC, OH, OR, PA, SC, TN, UT, VT, VA, WI, WY. No DC.</div><div class="src">unlock.com/faqs</div></td>
+  <td><div class="cell-val">27 states + DC</div><div class="cell-note">AZ, CA, CO, CT, FL, GA, HI, IL, IN, KY, MD, MI, MN, MO, NV, NJ, NY, NC, OH, OR, PA, SC, TN, UT, VA, WA, WI + DC.</div><div class="src">help.point.com/article/32 (May 2026)</div></td>
+  <td><div class="cell-val">21 states</div><div class="cell-note">AZ, CA, DE, FL, GA, ID, IN, MI, MN, MO, MT, NV, NJ, NY, OH, OR, PA, SC, TN, UT, VA.</div><div class="src">hometap.com (screenshot confirmed)</div></td>
+  <td><div class="cell-val">14 states <span class="badge-3p">3rd party</span></div><div class="cell-note">AZ, CA, CO, FL, NJ, NV, OH, OR, PA, SC, TN, UT, VA, WA.</div><div class="src">LendEDU, MoneyAtlas 2026; Splitero press release Jan 2025</div></td>
+  <td><div class="cell-val">12 states</div><div class="cell-note">AZ, CA, AR, FL, GA, KS, LA, MI, OK, OR, PA, WA.</div><div class="src">nada.co/eligibility</div></td>
+  <td><div class="cell-val">17 states + DC</div><div class="cell-note">AZ, CA, CO, FL, GA, IL, IN, MI, MO, NJ, NV, OH, PA, SC, TN, UT, WA + DC.</div><div class="src">jgwentworth.com/home-equity-cashout-faqs</div></td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><span class="badge-3p" style="font-size:10px;padding:2px 6px;">3rd party</span> Third-party sourced — not confirmed from brand's own site</div>
+  <div class="legend-item"><span style="background:#EEF6FF;padding:2px 8px;border-radius:3px;font-size:10px;border:1px solid #cce0ff;">Blue rows</span> Key consumer differentiators</div>
+  <div class="legend-item"><span style="background:#FFF5F5;padding:2px 8px;border-radius:3px;font-size:10px;border:1px solid #ffcccc;">Red rows</span> High-impact cost factors</div>
+  <div class="legend-item"><span style="background:#FFFBF0;padding:2px 8px;border-radius:3px;font-size:10px;border:1px solid #ffe599;">Yellow rows</span> Requires careful interpretation</div>
+</div>
+
+</body>
+</html>
