@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HEI Competitor Channel Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f7f7f5;
+    --surface: #ffffff;
+    --border: #e4e2dc;
+    --border-strong: #ccc9c0;
+    --text-primary: #1a1a18;
+    --text-secondary: #5a5a56;
+    --text-muted: #9a9990;
+    --unlock: #1a6b3c;
+    --unlock-bg: #edf7f1;
+    --unlock-border: #a8d8bc;
+    --hometap: #4b3fa0;
+    --hometap-bg: #f0eefb;
+    --point: #c45a1a;
+    --point-bg: #fef4ed;
+    --splitero: #b03030;
+    --splitero-bg: #fdf0f0;
+    --check: #1a7a3c;
+    --cross: #d0cec6;
+    --gap: #f4a030;
+    --radius: 6px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.04);
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    font-size: 14px;
+    line-height: 1.6;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  .page-max { max-width: 1100px; margin: 0 auto; }
+
+  /* Header */
+  header { margin-bottom: 2.5rem; border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; }
+  .header-meta { font-size: 11px; font-family: 'IBM Plex Mono', monospace; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+  h1 { font-size: 24px; font-weight: 600; color: var(--text-primary); line-height: 1.3; margin-bottom: 0.5rem; }
+  .header-sub { font-size: 14px; color: var(--text-secondary); max-width: 620px; }
+  .method-note { margin-top: 0.75rem; font-size: 12px; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; background: #f0efe9; border: 1px solid var(--border); border-radius: var(--radius); padding: 0.4rem 0.75rem; display: inline-block; }
+
+  /* Company legend */
+  .company-legend { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
+  .company-pill { display: flex; align-items: center; gap: 8px; padding: 0.4rem 0.85rem; border-radius: 20px; font-size: 12px; font-weight: 500; border: 1px solid; }
+  .company-pill.unlock { background: var(--unlock-bg); border-color: var(--unlock-border); color: var(--unlock); }
+  .company-pill.hometap { background: var(--hometap-bg); border-color: #c5bff0; color: var(--hometap); }
+  .company-pill.point { background: var(--point-bg); border-color: #f0c4a0; color: var(--point); }
+  .company-pill.splitero { background: var(--splitero-bg); border-color: #e0b0b0; color: var(--splitero); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .dot.unlock { background: var(--unlock); }
+  .dot.hometap { background: var(--hometap); }
+  .dot.point { background: var(--point); }
+  .dot.splitero { background: var(--splitero); }
+
+  /* Summary cards */
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 2.5rem; }
+  .summary-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem 1.25rem 1rem; box-shadow: var(--shadow); }
+  .summary-card.unlock { border-top: 3px solid var(--unlock); }
+  .summary-card.hometap { border-top: 3px solid var(--hometap); }
+  .summary-card.point { border-top: 3px solid var(--point); }
+  .summary-card.splitero { border-top: 3px solid var(--splitero); }
+  .summary-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 0.25rem; }
+  .summary-card h3.unlock { color: var(--unlock); }
+  .summary-card h3.hometap { color: var(--hometap); }
+  .summary-card h3.point { color: var(--point); }
+  .summary-card h3.splitero { color: var(--splitero); }
+  .channel-count { font-size: 28px; font-weight: 600; color: var(--text-primary); line-height: 1; margin-bottom: 0.5rem; }
+  .channel-count span { font-size: 13px; font-weight: 400; color: var(--text-muted); }
+  .summary-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+  .summary-tags { margin-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 4px; }
+  .tag-chip { font-size: 10px; padding: 2px 7px; border-radius: 4px; background: var(--bg); border: 1px solid var(--border); color: var(--text-secondary); font-family: 'IBM Plex Mono', monospace; }
+  .tag-chip.unique { background: #fffbec; border-color: #f0d080; color: #7a5a10; }
+
+  /* Section */
+  .section { margin-bottom: 2rem; }
+  .section-header { display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .section-title { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); }
+  .section-desc { font-size: 12px; color: var(--text-muted); }
+
+  /* Channel rows */
+  .channel-table { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; box-shadow: var(--shadow); }
+  .channel-row { display: grid; grid-template-columns: 220px 1fr 1fr 1fr 1fr; border-bottom: 1px solid var(--border); }
+  .channel-row:last-child { border-bottom: none; }
+  .channel-row.header-row { background: #f9f8f5; }
+  .cell { padding: 0.7rem 0.9rem; display: flex; align-items: flex-start; }
+  .cell.center { justify-content: center; align-items: flex-start; padding-top: 0.75rem; }
+  .cell-header { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); justify-content: center; }
+  .cell-header.unlock { color: var(--unlock); background: var(--unlock-bg); }
+  .cell-header.hometap { color: var(--hometap); background: var(--hometap-bg); }
+  .cell-header.point { color: var(--point); background: var(--point-bg); }
+  .cell-header.splitero { color: var(--splitero); background: var(--splitero-bg); }
+
+  .channel-name-cell { flex-direction: column; gap: 2px; }
+  .ch-name { font-size: 13px; font-weight: 500; color: var(--text-primary); }
+  .ch-note { font-size: 11px; color: var(--text-muted); }
+  .ch-id { font-size: 10px; font-family: 'IBM Plex Mono', monospace; color: var(--text-muted); margin-top: 2px; }
+
+  /* Check states */
+  .check-icon { font-size: 15px; color: var(--check); }
+  .cross-icon { font-size: 15px; color: var(--cross); }
+
+  .detail-block { flex-direction: column; gap: 3px; }
+  .detail-label { font-size: 11px; font-weight: 500; }
+  .detail-label.unlock { color: var(--unlock); }
+  .detail-label.hometap { color: var(--hometap); }
+  .detail-label.point { color: var(--point); }
+  .detail-label.splitero { color: var(--splitero); }
+  .detail-text { font-size: 11px; color: var(--text-secondary); line-height: 1.4; }
+  .detail-id { font-size: 10px; font-family: 'IBM Plex Mono', monospace; color: var(--text-muted); }
+
+  /* Gap callout */
+  .gap-row { background: #fffdf5; }
+  .gap-badge { font-size: 10px; background: #fef4d0; border: 1px solid #f0d070; color: #7a5a10; padding: 1px 6px; border-radius: 3px; font-weight: 500; margin-top: 2px; display: inline-block; }
+
+  /* Gaps section */
+  .gaps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-bottom: 2.5rem; }
+  .gap-card { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--gap); border-radius: 10px; padding: 1rem 1.1rem; box-shadow: var(--shadow); }
+  .gap-card-title { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 0.35rem; }
+  .gap-card-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+  .gap-who { font-size: 11px; color: var(--text-muted); margin-top: 0.4rem; font-style: italic; }
+
+  /* Footer */
+  footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--border); font-size: 11px; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+
+  @media (max-width: 768px) {
+    .channel-row { grid-template-columns: 1fr; }
+    .cell-header:not(:first-child) { display: none; }
+    .channel-row.header-row { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page-max">
+
+  <header>
+    <div class="header-meta">Competitive Intelligence · Home Equity Investment · Marketing</div>
+    <h1>HEI Competitor Channel Intelligence</h1>
+    <p class="header-sub">A full-stack audit of every marketing channel, pixel, and tag running across Unlock, Hometap, Point, and Splitero — built from live website tag inspection, GTM container analysis, and network request captures.</p>
+    <div class="method-note">Method: DevTools network capture + DOM HTML analysis + GTM container inspection · July 2026</div>
+  </header>
+
+  <!-- Company summaries -->
+  <div class="company-legend">
+    <div class="company-pill unlock"><span class="dot unlock"></span>Unlock — Us</div>
+    <div class="company-pill hometap"><span class="dot hometap"></span>Hometap</div>
+    <div class="company-pill point"><span class="dot point"></span>Point</div>
+    <div class="company-pill splitero"><span class="dot splitero"></span>Splitero</div>
+  </div>
+
+  <div class="summary-grid">
+    <div class="summary-card unlock">
+      <h3 class="unlock">Unlock</h3>
+      <div class="channel-count">18 <span>confirmed channels</span></div>
+      <p class="summary-desc">Broadest channel footprint in the competitive set. Performance-first stack with Amazon DSP, Bing, Audacy/AdsWizz, and Taboola unique to us. Strong CRM foundation with HubSpot + Segment + Heap. TTD handles CTV without needing a dedicated vendor. Everflow powers our affiliate program.</p>
+      <div class="summary-tags">
+        <span class="tag-chip unique">Amazon DSP</span>
+        <span class="tag-chip unique">Audacy/AdsWizz</span>
+        <span class="tag-chip unique">Bing Ads</span>
+        <span class="tag-chip unique">Everflow</span>
+        <span class="tag-chip">Meta · TikTok · Reddit</span>
+        <span class="tag-chip">Trade Desk · HubSpot</span>
+      </div>
+    </div>
+    <div class="summary-card hometap">
+      <h3 class="hometap">Hometap</h3>
+      <div class="channel-count">17 <span>confirmed channels</span></div>
+      <p class="summary-desc">Most sophisticated brand + CRO stack. Only competitor running Spotify, LinkedIn, and BouncePilot (anonymous visitor email retargeting). Contentsquare for session recording, VWO for A/B testing, and Prescriber for identity resolution signal heavy investment in optimization on top of acquisition. Autopilot + Segment = mature lifecycle marketing.</p>
+      <div class="summary-tags">
+        <span class="tag-chip unique">Spotify Ads</span>
+        <span class="tag-chip unique">LinkedIn Ads</span>
+        <span class="tag-chip unique">BouncePilot</span>
+        <span class="tag-chip unique">TVScientific</span>
+        <span class="tag-chip unique">Prescriber ID</span>
+        <span class="tag-chip">VWO · Contentsquare</span>
+      </div>
+    </div>
+    <div class="summary-card point">
+      <h3 class="point">Point</h3>
+      <div class="channel-count">13 <span>confirmed channels</span></div>
+      <p class="summary-desc">Leanest consumer footprint — deliberate, not underpowered. Apollo.io signals active B2B/broker outreach alongside consumer acquisition, making them the only competitor visibly working both channels. Transcend (enterprise consent manager) + lightest tag count = strong privacy posture. Yahoo DSP and Impact.com affiliates are unique to Point.</p>
+      <div class="summary-tags">
+        <span class="tag-chip unique">Yahoo DSP</span>
+        <span class="tag-chip unique">Apollo.io B2B</span>
+        <span class="tag-chip unique">Impact.com</span>
+        <span class="tag-chip unique">Aplo Funnel</span>
+        <span class="tag-chip unique">TVScientific</span>
+        <span class="tag-chip">Meta · Reddit · Google</span>
+      </div>
+    </div>
+    <div class="summary-card splitero">
+      <h3 class="splitero">Splitero</h3>
+      <div class="channel-count">14 <span>confirmed channels</span></div>
+      <p class="summary-desc">Making a distinct bet on audio and podcast advertising — Veritone + Magellan AI is unique in this set and suggests they're targeting homeowners through financial and real estate podcasts. Two TikTok pixels (unusual) and Nextdoor indicate aggressive testing of emerging/local channels. Custom Uni analytics platform + CookieYes = first-party data strategy. Google Ads confirmed via click URL but conversion tracking is server-side.</p>
+      <div class="summary-tags">
+        <span class="tag-chip unique">Veritone AI Media</span>
+        <span class="tag-chip unique">Magellan AI Podcast</span>
+        <span class="tag-chip unique">Nextdoor</span>
+        <span class="tag-chip unique">TikTok ×2</span>
+        <span class="tag-chip unique">Rakuten Affiliate</span>
+        <span class="tag-chip">Meta · Reddit · StackAdapt</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: Search -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Search & Intent</span>
+      <span class="section-desc">Capturing homeowners actively researching equity options — the highest-intent, most competitive channel in HEI</span>
+    </div>
+    <div class="channel-table">
+      <div class="channel-row header-row">
+        <div class="cell cell-header">Channel</div>
+        <div class="cell cell-header unlock">Unlock</div>
+        <div class="cell cell-header hometap">Hometap</div>
+        <div class="cell cell-header point">Point</div>
+        <div class="cell cell-header splitero">Splitero</div>
+      </div>
+      <div class="channel-row">
+        <div class="cell channel-name-cell"><span class="ch-name">Google Ads (Search)</span><span class="ch-note">Branded + non-branded keywords</span></div>
+        <div class="cell center detail-block"><span class="check-icon">✓</span><span class="detail-id">AW-437147563</span></div>
+        <div class="cell center detail-block"><span class="check-icon">✓</span><span class="detail-id">AW-11336204250</span></div>
+        <div class="cell center detail-block"><span class="check-icon">✓</span><span class="detail-id">AW-804136153 + AW-17413169669 (2 accounts)</span></div>
+        <div class="cell center detail-block"><span class="check-icon">✓</span><span class="detail-text">Server-side conversion tracking — confirmed via click URL hsa_acc=7002821844</span></div>
+      </div>
+      <div class="channel-row">
+        <div class="cell channel-name-cell"><span class="ch-name">Microsoft / Bing Ads</span><span class="ch-note">Bing search — 35% of desktop searches, skews older homeowners</span></div>
+        <div class="cell center detail-block"><span class="check-icon">✓</span><span class="detail-id">ti=17557667</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+      </div>
+      <div class="channel-row">
+        <div class="cell channel-name-cell"><span class="ch-name">Quora Ads</span><span class="ch-note">Intent targeting — homeowners researching equity, HELOCs, home improvement finance</span></div>
+        <div class="cell center"><span class="check-icon">✓</span></div>
+        <div class="cell center"><span class="check-icon">✓</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: Paid Social -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Paid Social</span>
+      <span class="section-desc">Audience-based targeting across social platforms — the primary volume channel for HEI consumer acquisition</span>
+    </div>
+    <div class="channel-table">
+      <div class="channel-row header-row">
+        <div class="cell cell-header">Channel</div>
+        <div class="cell cell-header unlock">Unlock</div>
+        <div class="cell cell-header hometap">Hometap</div>
+        <div class="cell cell-header point">Point</div>
+        <div class="cell cell-header splitero">Splitero</div>
+      </div>
+      <div class="channel-row">
+        <div class="cell channel-name-cell"><span class="ch-name">Meta (Facebook / Instagram)</span><span class="ch-note">Core consumer acquisition for all players — homeowner lookalikes, interest targeting, retargeting</span></div>
+        <div class="cell center detail-block"><span class="check-icon">✓</span><span class="detail-id">1518803961658812</span></div>
+        <div class="cell center detail-block"><span class="check-icon">✓</span><span class="detail-id">200289370760263</span></div>
+        <div class="cell center detail-block"><span class="check-icon">✓</span><span class="detail-id">773300188094782</span></div>
+        <div class="cell center detail-block"><span class="check-icon">✓</span><span class="detail-id">4649798021785214 + 962872779179235 (2 pixels)</span></div>
+      </div>
+      <div class="channel-row">
+        <div class="cell channel-name-cell"><span class="ch-name">TikTok Ads</span><span class="ch-note">Emerging channel for HEI — skews younger homeowners, strong for brand awareness</span></div>
+        <div class="cell center detail-block"><span class="check-icon">✓</span><span class="detail-id">CGO4VRJC77U8ANQ63Q1G</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center detail-block"><span class="check-icon">✓</span><span class="detail-text">Two separate TikTok pixels (CV5ODK3C + D6TC4SJC) — likely testing different creative or audiences</span></div>
+      </div>
+      <div class="channel-row">
+        <div class="cell channel-name-cell"><span class="ch-name">LinkedIn Ads</span><span class="ch-note">Professional targeting — financial advisors, mortgage brokers, homeowners in finance/tech roles</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center detail-block"><span class="check-icon">✓</span><span class="detail-text">liadm Insight Tag confirmed — only competitor running LinkedIn, suggesting broker/advisor targeting or high-income homeowner segments</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+      </div>
+      <div class="channel-row">
+        <div class="cell channel-name-cell"><span class="ch-name">Reddit Ads</span><span class="ch-note">Subreddit targeting — r/personalfinance, r/homeowners, r/realestate. High-intent, lower cost than Meta</span></div>
+        <div class="cell center"><span class="check-icon">✓</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center"><span class="check-icon">✓</span></div>
+        <div class="cell center"><span class="check-icon">✓</span></div>
+      </div>
+      <div class="channel-row">
+        <div class="cell channel-name-cell"><span class="ch-name">Nextdoor Ads</span><span class="ch-note">Hyperlocal neighborhood targeting — unique to Splitero, likely testing local homeowner communities</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center detail-block"><span class="check-icon">✓</span><span class="detail-text">Pixel ID: 33ac6e56-8c83-4b75-a9d1-586692cdd5d7</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: Programmatic / DSP -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Programmatic, Display & DSP</span>
+      <span class="section-desc">Algorithmic buying across the open web, connected TV, streaming audio, and native content — includes Google Display, Trade Desk, Amazon, StackAdapt, Yahoo, and Taboola</span>
+    </div>
+    <div class="channel-table">
+      <div class="channel-row header-row">
+        <div class="cell cell-header">Channel</div>
+        <div class="cell cell-header unlock">Unlock</div>
+        <div class="cell cell-header hometap">Hometap</div>
+        <div class="cell cell-header point">Point</div>
+        <div class="cell cell-header splitero">Splitero</div>
+      </div>
+      <div class="channel-row">
+        <div class="cell channel-name-cell"><span class="ch-name">Google Display / DoubleClick</span><span class="ch-note">Retargeting and prospecting across Google's display network</span></div>
+        <div class="cell center"><span class="check-icon">✓</span></div>
+        <div class="cell center"><span class="check-icon">✓</span></div>
+        <div class="cell center"><span class="check-icon">✓</span></div>
+        <div class="cell center"><span class="check-icon">✓</span></div>
+      </div>
+      <div class="channel-row">
+        <div class="cell channel-name-cell"><span class="ch-name">The Trade Desk (TTD)</span><span class="ch-note">Full-stack DSP covering display, CTV, streaming audio, and native. Unlock and Hometap both running TTD — this likely covers CTV/streaming for both without needing a dedicated vendor like TVScientific</span></div>
+        <div class="cell center detail-block"><span class="check-icon">✓</span><span class="detail-text">Also handles CTV + streaming audio buying for Unlock</span></div>
+        <div class="cell center detail-block"><span class="check-icon">✓</span><span class="detail-text">Runs alongside TVScientific — possible agency split or testing</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+      </div>
+      <div class="channel-row">
+        <div class="cell channel-name-cell"><span class="ch-name">Amazon DSP</span><span class="ch-note">Amazon's demand-side platform — display, OTT/streaming on Amazon Fire TV, Prime Video. Unique to Unlock in this set. Amazon's first-party purchase and browsing data makes it strong for home-related audiences</span></div>
+        <div class="cell center detail-block"><span class="check-icon">✓</span><span class="detail-text">c.amazon-adsystem.com + ara.paa-reporting-advertising.amazon confirmed</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+      </div>
+      <div class="channel-row">
+        <div class="cell channel-name-cell"><span class="ch-name">StackAdapt</span><span class="ch-note">Programmatic native and display — strong for financial services content targeting</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center"><span class="check-icon">✓</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center"><span class="check-icon">✓</span></div>
+      </div>
+      <div class="channel-row">
+        <div class="cell channel-name-cell"><span class="ch-name">Yahoo DSP</span><span class="ch-note">Yahoo native and display — unique to Point. Yahoo Finance audience is high-quality for homeowner finance targeting</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center detail-block"><span class="check-icon">✓</span><span class="detail-text">s.yimg.com confirmed — likely running on Yahoo Finance given homeowner finance intent audience</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+      </div>
+      <div class="channel-row">
+        <div class="cell channel-name-cell"><span class="ch-name">TVScientific</span><span class="ch-note">Dedicated CTV/streaming video advertising platform — performance-focused TV buying. Hometap and Point both running direct TVScientific pixels</span></div>
+        <div class="cell center detail-block"><span class="cross-icon">—</span><span class="detail-text">Covered via TTD</span></div>
+        <div class="cell center"><span class="check-icon">✓</span></div>
+        <div class="cell center"><span class="check-icon">✓</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+      </div>
+      <div class="channel-row">
+        <div class="cell channel-name-cell"><span class="ch-name">Taboola</span><span class="ch-note">Content discovery / native ads — appears on major financial publisher sites. Unique to Unlock. Strong for top-of-funnel awareness among homeowners browsing financial content</span></div>
+        <div class="cell center"><span class="check-icon">✓</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: Audio & Podcast -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Streaming Audio & Podcast</span>
+      <span class="section-desc">An emerging HEI channel — reaching homeowners during commutes, workouts, and home improvement listening. Splitero is the most aggressive here</span>
+    </div>
+    <div class="channel-table">
+      <div class="channel-row header-row">
+        <div class="cell cell-header">Channel</div>
+        <div class="cell cell-header unlock">Unlock</div>
+        <div class="cell cell-header hometap">Hometap</div>
+        <div class="cell cell-header point">Point</div>
+        <div class="cell cell-header splitero">Splitero</div>
+      </div>
+      <div class="channel-row">
+        <div class="cell channel-name-cell"><span class="ch-name">AdsWizz / Audacy</span><span class="ch-note">Audacy's ad tech platform — powers podcast and streaming radio advertising across Audacy's network of stations and shows</span></div>
+        <div class="cell center detail-block"><span class="check-icon">✓</span><span class="detail-text">proxidigital-3049-adswizz.attribution.adswizz.com confirmed</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+      </div>
+      <div class="channel-row">
+        <div class="cell channel-name-cell"><span class="ch-name">Spotify Ads</span><span class="ch-note">Spotify podcast and streaming audio — unique to Hometap. Targets homeowner demographics via music and podcast listening behavior</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center detail-block"><span class="check-icon">✓</span><span class="detail-text">pixel.byspotify.com + pixels.spotify.com — running both Spotify Ad Studio and Spotify Audience Network</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+      </div>
+      <div class="channel-row">
+        <div class="cell channel-name-cell"><span class="ch-name">Veritone</span><span class="ch-note">AI-powered media buying platform specializing in CTV and audio — unique to Splitero. Automates buying across broadcast, streaming, and podcast inventory</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center detail-block"><span class="check-icon">✓</span><span class="detail-text">p.veritone-ce.com confirmed — suggests Splitero is using AI-driven media optimization across audio and CTV inventory</span></div>
+      </div>
+      <div class="channel-row">
+        <div class="cell channel-name-cell"><span class="ch-name">Magellan AI</span><span class="ch-note">Podcast advertising measurement platform — tracks podcast ad spend and attribution. Only Splitero running this, confirming active podcast ad buying with dedicated measurement</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center detail-block"><span class="check-icon">✓</span><span class="detail-text">cdn.mgln.ai confirmed — Magellan AI is specifically a podcast measurement tool, confirming Splitero is actively buying podcast ads and tracking their performance</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: Affiliate -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Affiliate & Partner Programs</span>
+      <span class="section-desc">Third-party referral networks — mortgage brokers, financial publishers, comparison sites, and partner co-marketing. All four competitors are running affiliate programs</span>
+    </div>
+    <div class="channel-table">
+      <div class="channel-row header-row">
+        <div class="cell cell-header">Channel</div>
+        <div class="cell cell-header unlock">Unlock</div>
+        <div class="cell cell-header hometap">Hometap</div>
+        <div class="cell cell-header point">Point</div>
+        <div class="cell cell-header splitero">Splitero</div>
+      </div>
+      <div class="channel-row">
+        <div class="cell channel-name-cell"><span class="ch-name">Affiliate Platform</span><span class="ch-note">Each competitor uses a different affiliate tracking platform — all confirmed active</span></div>
+        <div class="cell detail-block"><span class="detail-label unlock">Everflow</span><span class="detail-text">unlksite.com — fires on affiliate URL params (unlkcamp + affid). Enterprise affiliate platform common in fintech</span></div>
+        <div class="cell detail-block"><span class="detail-label hometap">Pubtrack</span><span class="detail-text">pubtrack.co — custom partner tracking script, fires sitewide</span></div>
+        <div class="cell detail-block"><span class="detail-label point">Impact.com</span><span class="detail-text">pointdigitalfinance.sjv.io confirmed — Impact is one of the largest affiliate networks, used heavily by fintech</span></div>
+        <div class="cell detail-block"><span class="detail-label splitero">Rakuten + Arttrk</span><span class="detail-text">tag.rmp.rakuten.com + arttrk.com/pixel — Rakuten Advertising network plus a separate attribution tracker for lead events</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6: Email, CRM & Retargeting -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Email, CRM & Retargeting</span>
+      <span class="section-desc">Re-engaging visitors who didn't convert and nurturing leads through the funnel</span>
+    </div>
+    <div class="channel-table">
+      <div class="channel-row header-row">
+        <div class="cell cell-header">Channel</div>
+        <div class="cell cell-header unlock">Unlock</div>
+        <div class="cell cell-header hometap">Hometap</div>
+        <div class="cell cell-header point">Point</div>
+        <div class="cell cell-header splitero">Splitero</div>
+      </div>
+      <div class="channel-row">
+        <div class="cell channel-name-cell"><span class="ch-name">HubSpot</span><span class="ch-note">CRM + marketing automation</span></div>
+        <div class="cell center detail-block"><span class="check-icon">✓</span><span class="detail-text">js.hubspot.com, hs-scripts, hs-analytics, hsforms all confirmed — full HubSpot suite active</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+      </div>
+      <div class="channel-row">
+        <div class="cell channel-name-cell"><span class="ch-name">BouncePilot</span><span class="ch-note">Identifies anonymous website visitors and re-engages them via email before they leave. Unique to Hometap — recovers visitors who browse but don't fill out a form</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center detail-block"><span class="check-icon">✓</span><span class="detail-text">cdn.pdst.fm confirmed — BouncePilot matches site visitors to known email addresses and can trigger outreach within hours of a visit, even without a form fill</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+      </div>
+      <div class="channel-row">
+        <div class="cell channel-name-cell"><span class="ch-name">Autopilot</span><span class="ch-note">Marketing automation and email journey builder</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center detail-block"><span class="check-icon">✓</span><span class="detail-text">s.autopilotapp.com + capture-api.ap3prod.com — running full Autopilot journey automation alongside Segment CDP</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7: Analytics & Data -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Analytics, Data & Optimization</span>
+      <span class="section-desc">The measurement and optimization layer — determines how well each competitor can understand and improve their acquisition funnel</span>
+    </div>
+    <div class="channel-table">
+      <div class="channel-row header-row">
+        <div class="cell cell-header">Channel</div>
+        <div class="cell cell-header unlock">Unlock</div>
+        <div class="cell cell-header hometap">Hometap</div>
+        <div class="cell cell-header point">Point</div>
+        <div class="cell cell-header splitero">Splitero</div>
+      </div>
+      <div class="channel-row">
+        <div class="cell channel-name-cell"><span class="ch-name">Customer Data Platform (CDP)</span><span class="ch-note">Centralizes all customer data and routes to downstream tools</span></div>
+        <div class="cell detail-block"><span class="check-icon">✓</span><span class="detail-text">Segment — routes to Facebook, Google Ads, Heap, and GTM from one place</span></div>
+        <div class="cell detail-block"><span class="check-icon">✓</span><span class="detail-text">Segment — "Segment snippet included twice" in source, suggesting active multi-environment use</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+      </div>
+      <div class="channel-row">
+        <div class="cell channel-name-cell"><span class="ch-name">Product Analytics</span><span class="ch-note">Deep funnel and behavior analysis beyond GA4</span></div>
+        <div class="cell detail-block"><span class="check-icon">✓</span><span class="detail-text">Heap — auto-captures all events without manual instrumentation</span></div>
+        <div class="cell detail-block"><span class="check-icon">✓</span><span class="detail-text">Heap — same platform, likely tracking application funnel completion rates</span></div>
+        <div class="cell detail-block"><span class="check-icon">✓</span><span class="detail-text">PostHog — open-source alternative to Heap, self-hosted option</span></div>
+        <div class="cell detail-block"><span class="check-icon">✓</span><span class="detail-text">PostHog — running on ot.splitero.com subdomain (likely app, not marketing site)</span></div>
+      </div>
+      <div class="channel-row">
+        <div class="cell channel-name-cell"><span class="ch-name">A/B Testing & Experimentation</span><span class="ch-note">Optimizing conversion rates through structured testing</span></div>
+        <div class="cell detail-block"><span class="check-icon">✓</span><span class="detail-text">Split.io — feature flag platform, more engineering-driven than marketing-driven experimentation</span></div>
+        <div class="cell detail-block"><span class="check-icon">✓</span><span class="detail-text">VWO — dedicated marketing A/B testing. Account 989304. Hometap is the only competitor with a dedicated landing page and funnel optimization tool</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+      </div>
+      <div class="channel-row">
+        <div class="cell channel-name-cell"><span class="ch-name">Session Recording & UX</span><span class="ch-note">Understanding how visitors interact with the site and where they drop off</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell detail-block"><span class="check-icon">✓</span><span class="detail-text">Contentsquare — enterprise UX analytics, heatmaps, session replays. c.contentsquare.net confirmed. Heavy investment in understanding funnel friction</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+      </div>
+      <div class="channel-row">
+        <div class="cell channel-name-cell"><span class="ch-name">Identity Resolution</span><span class="ch-note">Matching anonymous visitors to known consumer profiles for better audience targeting</span></div>
+        <div class="cell detail-block"><span class="check-icon">✓</span><span class="detail-text">PVD Pixel (pvdpix.com) + trkn.us cross-device tracking</span></div>
+        <div class="cell detail-block"><span class="check-icon">✓</span><span class="detail-text">Prescriber (pdscrb.com) identity resolution + trkn.us cross-device. Prescriber is used for matching web visitors to homeowner data for better audience building</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+        <div class="cell center"><span class="cross-icon">—</span></div>
+      </div>
+      <div class="channel-row">
+        <div class="cell channel-name-cell"><span class="ch-name">Consent Management</span><span class="ch-note">Privacy compliance — affects which tags fire and when. Absence = all tags fire on page load for all visitors</span></div>
+        <div class="cell detail-block"><span class="check-icon">✓</span><span class="detail-text">Ketch — modern consent management platform used by fintech. Ensures CCPA compliance</span></div>
+        <div class="cell center"><span class="cross-icon">—</span><span class="detail-text" style="font-size:11px;color:var(--text-muted);text-align:center;display:block;margin-top:4px;">No consent manager — all tags fire for all visitors</span></div>
+        <div class="cell detail-block"><span class="check-icon">✓</span><span class="detail-text">Transcend — most enterprise-grade consent solution in the set. May be limiting tag visibility vs competitors</span></div>
+        <div class="cell detail-block"><span class="check-icon">✓</span><span class="detail-text">CookieYes — lightweight consent banner. Blocks some pixels until user opts in</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gaps section -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Unlock Channel Gaps</span>
+      <span class="section-desc">Channels competitors are actively running that Unlock is not — ranked by strategic relevance to HEI acquisition</span>
+    </div>
+    <div class="gaps-grid">
+      <div class="gap-card">
+        <div class="gap-card-title">LinkedIn Ads</div>
+        <p class="gap-card-desc">Hometap is the only HEI player running LinkedIn — likely targeting homeowners in finance, tech, and professional roles, or reaching mortgage brokers and advisors. Given Unlock's focus on partnerships, LinkedIn is a natural fit for broker/partner outreach.</p>
+        <p class="gap-who">Running: Hometap only</p>
+      </div>
+      <div class="gap-card">
+        <div class="gap-card-title">Dedicated A/B Testing (VWO / Optimizely)</div>
+        <p class="gap-card-desc">Hometap runs VWO for landing page and funnel optimization. Split.io (which Unlock uses) is an engineering feature-flag tool, not a marketer-friendly CRO platform. A dedicated A/B testing tool would allow faster experimentation on landing pages, CTAs, and application flows without engineering involvement.</p>
+        <p class="gap-who">Running: Hometap (VWO)</p>
+      </div>
+      <div class="gap-card">
+        <div class="gap-card-title">Anonymous Visitor Retargeting (BouncePilot)</div>
+        <p class="gap-card-desc">BouncePilot identifies anonymous site visitors — people who looked at the site but didn't fill out a form — and enables email outreach to them within hours. For a high-consideration product like HEI where people research for weeks, this could meaningfully recover lost pipeline. Only Hometap is running it.</p>
+        <p class="gap-who">Running: Hometap only</p>
+      </div>
+      <div class="gap-card">
+        <div class="gap-card-title">Spotify Ads</div>
+        <p class="gap-card-desc">Hometap is running Spotify across both Ad Studio and the Audience Network. Homeowners are heavy podcast and playlist listeners — home improvement, personal finance, and real estate podcasts are natural environments. Unlock already has Audacy/AdsWizz for podcast buying via TTD but Spotify's first-party audience data is distinct.</p>
+        <p class="gap-who">Running: Hometap only</p>
+      </div>
+      <div class="gap-card">
+        <div class="gap-card-title">Session Recording (Contentsquare)</div>
+        <p class="gap-card-desc">Hometap uses Contentsquare to understand where visitors drop off in the application funnel. Without session recording, identifying friction in the UX requires guesswork. Given the complexity of the HEI application, understanding where people hesitate or abandon could unlock significant conversion rate improvement.</p>
+        <p class="gap-who">Running: Hometap only</p>
+      </div>
+      <div class="gap-card">
+        <div class="gap-card-title">Nextdoor Ads</div>
+        <p class="gap-card-desc">Splitero is running Nextdoor — a hyperlocal platform where homeowners in specific neighborhoods discuss home topics. Lower volume than Meta or Google but potentially very high intent. Worth testing given Unlock's local market strategy.</p>
+        <p class="gap-who">Running: Splitero only</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span>HEI Competitor Channel Intelligence · July 2026</span>
+    <span>Method: Live tag inspection via Chrome DevTools · GTM container analysis · DOM HTML capture · Network request analysis</span>
+    <span>Internal use only — Unlock Technologies</span>
+  </footer>
+
+</div>
+</body>
+</html>
