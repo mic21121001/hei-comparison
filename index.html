@@ -98,7 +98,7 @@
   .legend { padding: 1rem 2rem; font-size: 10px; color: #888; display: flex; gap: 1.5rem; flex-wrap: wrap; border-top: 1px solid #eee; }
   .legend-item { display: flex; align-items: center; gap: 5px; }
 
-  col.c1{width:11%}col.c2{width:15%}col.c3{width:15%}col.c4{width:15%}col.c5{width:15%}col.c6{width:15%}col.c7{width:14%}
+  col.c1{width:10%}col.c2{width:13%}col.c3{width:12%}col.c4{width:12%}col.c5{width:12%}col.c6{width:11%}col.c7{width:10%}col.c8{width:12%}
 
 /* === SCORECARD STYLES === */
 
@@ -182,7 +182,7 @@ table.weight { margin-bottom: 1rem; }
 
 <div class="table-container">
 <table>
-<colgroup><col class="c1"><col class="c2"><col class="c3"><col class="c4"><col class="c5"><col class="c6"><col class="c7"></colgroup>
+<colgroup><col class="c1"><col class="c2"><col class="c3"><col class="c4"><col class="c5"><col class="c6"><col class="c7"><col class="c8"></colgroup>
 <thead>
 <tr>
   <th></th>
@@ -192,6 +192,7 @@ table.weight { margin-bottom: 1rem; }
   <th><span class="co-name">Splitero</span><span class="co-tag tag-splitero">HEI</span></th>
   <th><span class="co-name">Nada</span><span class="co-tag tag-nada">HEA</span></th>
   <th><span class="co-name">JG Wentworth</span><span class="co-tag tag-jgw">HEA</span></th>
+  <th><span class="co-name">Unison</span><span class="co-tag" style="background:#00897B;color:#fff;">ESA</span></th>
 </tr>
 </thead>
 <tbody>
@@ -205,6 +206,7 @@ table.weight { margin-bottom: 1rem; }
   <td><div class="cell-val"><span class="badge badge-warn">Soft then hard</span></div><div class="cell-note">Soft at prequalify. Hard pull at application submission — recorded on credit history, may impact score.</div><div class="src">splitero.com/credit-report-policy</div></td>
   <td><div class="cell-val"><span class="badge badge-warn">Soft / conditional hard</span></div><div class="cell-note">"In certain situations, a hard credit inquiry may be necessary; however, Nada always seeks your consent." Soft in most cases but hard pull explicitly possible.</div><div class="src">nada.co/frequently-asked-questions</div></td>
   <td><div class="cell-val"><span class="badge badge-warn">Soft then hard</span></div><div class="cell-note">Soft at prequalify. Hard pull only after initial estimate received and homeowner gives explicit approval to proceed.</div><div class="src">jgwentworth.com/home-equity-cashout-faqs</div></td>
+  <td><div class="cell-val"><span class="badge badge-yes">Soft pull only</span></div><div class="cell-note">Soft pull throughout entire process including full application — confirmed from unison.com/faq: "This never means that we have used a hard credit pull, and your credit will not be affected." Ongoing soft pulls during agreement lifetime. No credit score impact at any stage — matches Unlock's key differentiator.</div><div class="src">unison.com/faq (primary source, confirmed)</div></td>
 </tr>
 
 <!-- FUNDING SPEED -->
@@ -216,6 +218,7 @@ table.weight { margin-bottom: 1rem; }
   <td><div class="cell-val">As little as 10 days (advertised); 2–4 weeks typical</div><div class="cell-note">"From application to funded in as little as 10 days." Third-party reviews put realistic range at 2–4 weeks.</div><div class="src">splitero.com/how-it-works; LendEDU 2026</div></td>
   <td><div class="cell-val">As little as 2 weeks</div><div class="cell-note">"Unlock your equity in as little as 2 weeks." Timeline starts once all docs submitted; assumes AVM appraisal.</div><div class="src">nada.co/homeshares (footnote confirmed)</div></td>
   <td><div class="cell-val">2–3 weeks (industry avg cited)</div><div class="cell-note">JGW's resources cite industry average of 2–3 weeks but do not publish a JGW-specific HEA funding timeline.</div><div class="src">jgwentworth.com/resources/what-is-a-home-equity-agreement</div></td>
+  <td><div class="cell-val">Not prominently published</div><div class="cell-note">Unison's FAQ describes a multi-step process: estimate → application → appraisal → review and close. No specific timeline published. Given the income verification and underwriting requirements, likely longer than AVM-based processes.</div><div class="src">unison.com/faq</div></td>
 </tr>
 
 <!-- ANNUAL COST CAP -->
@@ -227,6 +230,7 @@ table.weight { margin-bottom: 1rem; }
   <td><div class="cell-val">17.99% nominal, compounded monthly</div><div class="cell-note">"Safety Cap." Monthly compounding = effective annual ~19.6% — similar to Unlock's simple 19.9%.</div><div class="src">splitero.com/pricing (screenshot confirmed)</div></td>
   <td><div class="cell-val">19.99% simple annual</div><div class="cell-note">"Capped at 19.99% per year." Simple annual — no compounding language.</div><div class="src">nada.co/pricing</div></td>
   <td><div class="cell-val">19.99% simple annual</div><div class="cell-note">"You'll never owe more than 19.99% annualized." Simple annual, no compounding mentioned.</div><div class="src">jgwentworth.com/home-equity-cashout-faqs</div></td>
+  <td><div class="cell-val"><span class="badge badge-danger">No published cap</span></div><div class="cell-note">Unison publishes no annualized cost cap — the only company in this comparison without one. In a strong appreciation market, there is no ceiling on what Unison can collect. "Because Unison publishes no annualized cost cap, where several competitors set one, a strongly appreciating market is not limited by a stated ceiling." This is a significant consumer risk that distinguishes Unison from all other companies in this table.</div><div class="src">equitysquirrel.com Unison review June 2026; unison.com (no cap mentioned in any primary documentation)</div></td>
 </tr>
 
 <!-- IF HOME VALUE GOES DOWN -->
@@ -238,6 +242,7 @@ table.weight { margin-bottom: 1rem; }
   <td><div class="cell-val"><span class="badge badge-warn">Still pays contracted % of ending value</span></div><div class="cell-note">Share of home value. Splitero collects its contracted percentage of whatever the home is worth at settlement. If home depreciates, the dollar amount owed is lower — but Splitero's rate is unchanged. Exact depreciation scenarios not published. Splitero's "Safety Cap" only limits upside in appreciation — it does not reduce the rate in a down market.</div><div class="src">Splitero/Blue Owl press release; equitysquirrel.com Point vs Splitero July 2026</div></td>
   <td><div class="cell-val"><span class="badge badge-warn">Still pays contracted % of ending value</span></div><div class="cell-note">Share of home value. Nada's settlement is calculated by applying its share percentage to your home's updated appraised value at settlement. If home depreciates, dollar amount owed is lower — but Nada's contracted rate is unchanged. The 19.99% annual cap limits upside only.</div><div class="src">nada.co/pricing (primary source)</div></td>
   <td><div class="cell-val"><span class="badge badge-warn">Still owes settlement — floor may apply</span></div><div class="cell-note">Share of home value. JGW's own resources explicitly state: "The homeowner still owes a settlement amount even in a declining market; the agreement doesn't simply extinguish if values fall" and that "providers generally build risk adjustments and loss floors into their contracts." JGW does not publish whether a specific floor exists in their HEA product. Dollar amount owed is lower if home depreciates — but the rate and any floor terms should be verified in the contract before signing.</div><div class="src">jgwentworth.com/resources/what-is-a-home-equity-agreement (primary source)</div></td>
+  <td><div class="cell-val"><span class="badge badge-yes">Genuine downside sharing — with conditions</span></div><div class="cell-note">Share of change in value model. If your home loses value after the initial restriction period, Unison shares in that loss — you may owe less than you received, or potentially $0 in cases of significant depreciation. This is the most genuine downside protection of any company in this comparison.<br><br><b>Important caveat:</b> Downside sharing only applies if you SELL your home. If you Special Terminate (buy out Unison rather than sell), Unison does NOT share in depreciation — you must pay back the full original investment regardless of home value. This significantly limits the real-world applicability of the downside protection for homeowners who want to stay in their homes.</div><div class="src">unison.com/faq (primary source, confirmed)</div></td>
 </tr>
 
 <!-- EXCHANGE RATE -->
@@ -249,6 +254,7 @@ table.weight { margin-bottom: 1rem; }
   <td><div class="cell-val">~2.00× <span class="badge-3p">3rd party</span></div><div class="cell-note">Not published publicly. Based on securitization data and third-party reviews. Splitero's pricing opacity is itself a consumer risk.</div><div class="src">HELN News; LendEDU, MoneyAtlas 2026</div></td>
   <td><div class="cell-val">1.85× (standard)</div><div class="cell-note">"Exchange rate starts at 1.85." Most transparently published rate of the six.</div><div class="src">nada.co/pricing</div></td>
   <td><div class="cell-val">2.00×</div><div class="cell-note">"If you receive a $50K Cashout (10% of $500K home), we receive up to 20%." Explicitly stated in FAQ.</div><div class="src">jgwentworth.com/home-equity-cashout-faqs</div></td>
+  <td><div class="cell-val">4× the % accessed (on change in value only)</div><div class="cell-note">Unison receives approximately 4× the percentage of home value accessed, applied only to future change in value — not total home value. Example: access 10% ($50K on $500K home) → Unison receives 40% of any appreciation above the Original Agreed Value. Max 60% of appreciation (if you access the maximum 15%). This is not directly comparable to other companies' multipliers since it applies to change only, not total value.</div><div class="src">unison.com/blog/unison-vs-unlock (primary source)</div></td>
 </tr>
 
 <!-- TERM -->
@@ -260,6 +266,7 @@ table.weight { margin-bottom: 1rem; }
   <td><div class="cell-val">10–30 years (co-term) <span class="badge-3p">3rd party</span></div><div class="cell-note">Term runs as long as senior mortgage — min 10 years, max 30 years. No prepayment penalty.</div><div class="src">SuperMoney, LendEDU, MoneyAtlas 2026</div></td>
   <td><div class="cell-val">10 years</div><div class="cell-note">Can renew into a new 10-year HEA at expiry.</div><div class="src">nada.co/pricing</div></td>
   <td><div class="cell-val">10 years</div><div class="cell-note">Must settle by year 10 or JGW may become co-owner of property.</div><div class="src">jgwentworth.com/home-equity-cashout-faqs</div></td>
+  <td><div class="cell-val">30 years</div><div class="cell-note">Longest term in the category — tied with Point. No prepayment penalty. Can sell or settle at any time up to 30 years. Some features (including downside sharing) only available after initial restriction period.</div><div class="src">unison.com/faq (primary source)</div></td>
 </tr>
 
 <!-- FEES -->
@@ -343,6 +350,21 @@ table.weight { margin-bottom: 1rem; }
     </div>
     <div class="src">jgwentworth.com/how-it-works-home-equity-agreement</div>
   </td>
+  <td>
+    <div class="cell-val">Origination: 3.9%</div>
+    <div class="cell-note">
+      Lowest origination fee of all seven companies.<br><br>
+      <b>Third-party fees (homeowner responsible):</b><br>
+      • Appraisal ($450–$1,250)<br>
+      • Home inspection ($650–$1,050)<br>
+      • Settlement/title/escrow ($700–$1,750)<br>
+      • State taxes and recording fees<br>
+      Unison pays credit report costs — not passed to consumer.<br><br>
+      <b>Note:</b> Home inspection is required (in addition to appraisal) — unique among the seven companies and adds $650–$1,050 not required by other HEI providers.<br><br>
+      <span class="badge badge-neutral">Counseling</span> Not confirmed.
+    </div>
+    <div class="src">unison.com/faq; unison.com/blog/unison-vs-unlock (primary sources)</div>
+  </td>
 </tr>
 
 <!-- HOME VALUE DISCOUNT -->
@@ -354,6 +376,7 @@ table.weight { margin-bottom: 1rem; }
   <td><div class="cell-val"><span class="badge badge-neutral">Not confirmed</span></div><div class="cell-note">No third-party source mentions a risk adjustment for Splitero. Likely none but cannot confirm from primary source.</div><div class="src">Multiple 2026 reviews — none mention discount</div></td>
   <td><div class="cell-val"><span class="badge badge-yes">No discount</span></div><div class="cell-note">"Tied to the change in your home's value from the starting appraised value." Full appraisal used as baseline.</div><div class="src">nada.co/pricing</div></td>
   <td><div class="cell-val"><span class="badge badge-yes">No discount</span></div><div class="cell-note">Full appraised value used — no risk adjustment or discount mentioned in any docs.</div><div class="src">jgwentworth.com/home-equity-cashout-faqs</div></td>
+  <td><div class="cell-val"><span class="badge badge-warn">5% risk adjustment applied</span></div><div class="cell-note">Unison applies a 5% risk adjustment to the appraised value to establish the Original Agreed Value. Example: $500K home → $475K Original Agreed Value. This is significantly lower than Point's 27% discount and is designed to account for appraisal uncertainty — not to extract additional value. Unison argues this allows faster closing without multiple appraisals.</div><div class="src">unison.com/faq (primary source, confirmed)</div></td>
 </tr>
 
 <!-- PRICING MODEL -->
@@ -365,6 +388,7 @@ table.weight { margin-bottom: 1rem; }
   <td><div class="cell-val">Share of home value</div><div class="cell-note">Splitero receives a percentage share of the home's future value at settlement — not just appreciation above a baseline. Confirmed in Splitero's own press releases: "a lump sum of cash in exchange for a share of the home's future value." WalletGrower (Fiat Growth-owned) incorrectly describes this as "share of appreciation" — the primary source language is share of value.</div><div class="src">Splitero/Blue Owl press release (StockTitan); equitysquirrel.com Point vs Splitero July 2026</div></td>
   <td><div class="cell-val">Share of home value</div><div class="cell-note">"Nada receives a percentage share of your home's future value."</div><div class="src">nada.co/pricing</div></td>
   <td><div class="cell-val">Share of home value</div><div class="cell-note">"JGW's Share" = % of home's future value at settlement.</div><div class="src">jgwentworth.com/home-equity-cashout-faqs</div></td>
+  <td><div class="cell-val">Share of change in value</div><div class="cell-note">Unison only shares in the difference between starting and ending agreed value — not total home value. The only company in this comparison using this model. Neither cheaper nor more expensive than share-of-value models universally — outcome depends entirely on how much the home appreciates or depreciates. In flat or declining markets Unison costs less; in strong appreciation markets Unison can cost more.</div><div class="src">unison.com/blog/unison-vs-unlock; unison.com/faq</div></td>
 </tr>
 
 <!-- LICENSING -->
@@ -429,6 +453,15 @@ table.weight { margin-bottom: 1rem; }
     </div>
     <div class="src">jgwentworth.com HEA affiliate page footer (primary source — screenshot confirmed July 2026)</div>
   </td>
+  <td>
+    <div class="cell-val">NMLS #2574289</div>
+    <div class="cell-note">Entity: Real Estate Equity Exchange, Inc. d/b/a Unison. Operating subsidiaries: Unison Mortgage Corporation, Unison Agreement Corporation, Unison Investment Management LLC, Unison Insurance Services LLC.<br><br>
+    Founded 2004 — longest operating history of any company in this comparison.<br><br>
+    <b>License types held:</b> Confirmed across 24 states + DC. Full license list at unison.com/licenses.<br><br>
+    <span class="badge badge-alert">⚠ Active litigation 2026:</span> Multiple active lawsuits including class action filings over how equity sharing agreements are marketed and regulated. Prospective customers and partners should review current court filings before proceeding.
+    </div>
+    <div class="src">unison.com/licenses; unison.com footer (primary source); equitysquirrel.com Unison review June 2026</div>
+  </td>
 </tr>
 
 <!-- PARTIAL BUYBACK -->
@@ -440,6 +473,7 @@ table.weight { margin-bottom: 1rem; }
   <td><div class="cell-val"><span class="badge badge-no">No <span class="badge-3p">3rd party</span></span></div><div class="cell-note">Full settlement only. No prepayment penalty.</div><div class="src">LendEDU, topmoneyhub.com 2026</div></td>
   <td><div class="cell-val"><span class="badge badge-no">No</span></div><div class="cell-note">Full buyout only. No prepayment penalty.</div><div class="src">nada.co/eligibility</div></td>
   <td><div class="cell-val"><span class="badge badge-yes">Yes</span></div><div class="cell-note">Partial payments allowed any time with 45 days notice. Each payment reduces JGW's share proportionally.</div><div class="src">jgwentworth.com/home-equity-cashout-faqs</div></td>
+  <td><div class="cell-val"><span class="badge badge-yes">Yes</span></div><div class="cell-note">Partial buyout available — homeowner can reduce Unison's share without ending the agreement. Both Unison and Unlock offer this feature; most HEI competitors do not.</div><div class="src">unison.com/blog/unison-vs-unlock (primary source)</div></td>
 </tr>
 
 <!-- MAX INVESTMENT -->
@@ -451,6 +485,7 @@ table.weight { margin-bottom: 1rem; }
   <td><div class="cell-val">$600,000</div><div class="cell-note">Up to 25% of home value. Min $50,000. Home value $200K–$5M. Min 30% equity.</div><div class="src">Splitero marketing documentation</div></td>
   <td><div class="cell-val">$500,000 (primary/2nd)<br>$100,000 (investment)</div><div class="cell-note">Max 30% of home value. Min $20,000.</div><div class="src">nada.co/eligibility</div></td>
   <td><div class="cell-val">$400,000</div><div class="cell-note">Generally 10–20% of home value. Min $15,000. Min home value $150,000. Lowest ceiling of the six.</div><div class="src">jgwentworth.com/home-equity-cashout-faqs</div></td>
+  <td><div class="cell-val">$500,000</div><div class="cell-note">Up to 15% of home value, capped at $500,000. Min $30,000. The 15% cap is the most restrictive access ceiling of all seven companies — homeowners with significant equity may be limited.</div><div class="src">unison.com (primary source)</div></td>
 </tr>
 
 <!-- MIN CREDIT -->
@@ -462,6 +497,7 @@ table.weight { margin-bottom: 1rem; }
   <td><div class="cell-val">500 <span class="badge-3p">3rd party</span></div><div class="src">LendEDU, MoneyAtlas, SuperMoney 2026</div></td>
   <td><div class="cell-val">500 (primary/2nd)<br>720 (investment)</div><div class="src">nada.co/eligibility</div></td>
   <td><div class="cell-val">600</div><div class="cell-note">Highest minimum for primary residences of the six.</div><div class="src">jgwentworth.com/home-equity-cashout-faqs</div></td>
+  <td><div class="cell-val">620 (mid-FICO)</div><div class="cell-note">Higher than most competitors. Income verification also required — Unison is the only company in this comparison that reviews income/DTI. This makes Unison the most restrictive qualifier of all seven companies.</div><div class="src">unison.com/faq; unison.com/blog/unison-vs-unlock</div></td>
 </tr>
 
 <!-- RENOVATION CREDIT -->
@@ -473,6 +509,7 @@ table.weight { margin-bottom: 1rem; }
   <td><div class="cell-val"><span class="badge badge-yes">Yes <span class="badge-3p">3rd party</span></span></div><div class="cell-note">Adjusts ending value for eligible home improvements.</div><div class="src">SuperMoney 2026</div></td>
   <td><div class="cell-val"><span class="badge badge-neutral">Not published</span></div><div class="src">nada.co</div></td>
   <td><div class="cell-val"><span class="badge badge-yes">Yes</span></div><div class="cell-note">Remodeling adjustment available. Min $25,000 value increase to qualify.</div><div class="src">jgwentworth.com/home-equity-cashout-faqs</div></td>
+  <td><div class="cell-val"><span class="badge badge-yes">Yes — after year 3</span></div><div class="cell-note">Capital Improvement Adjustment (Remodeling Adjustment) available after year 3. No minimum value threshold — any qualifying improvement eligible. Must use licensed contractors and document fully. Independent appraiser determines value added (not cost of project). Most generous renovation credit terms of all seven companies — no minimum improvement value required.</div><div class="src">unison.com/faq; unison.com/blog/unison-vs-unlock (primary sources)</div></td>
 </tr>
 
 <!-- RENTAL PROPERTY -->
@@ -484,6 +521,7 @@ table.weight { margin-bottom: 1rem; }
   <td><div class="cell-val"><span class="badge badge-no">No <span class="badge-3p">3rd party</span></span></div><div class="cell-note">Owner-occupied only — no investment or rental properties.</div><div class="src">LendEDU, MoneyAtlas 2026</div></td>
   <td><div class="cell-val"><span class="badge badge-yes">Yes</span></div><div class="cell-note">Investment properties eligible but capped at $100K, require 720 credit score.</div><div class="src">nada.co/eligibility</div></td>
   <td><div class="cell-val"><span class="badge badge-no">No</span></div><div class="cell-note">Primary and second homes only. Investment properties not eligible.</div><div class="src">jgwentworth.com/home-equity-cashout-faqs</div></td>
+  <td><div class="cell-val"><span class="badge badge-neutral">Not confirmed</span></div><div class="cell-note">Income verification requirement and homeowner occupancy language in Unison's FAQ suggests primary residences only, but not explicitly confirmed in public documentation.</div><div class="src">unison.com/faq — occupancy requirement implied but not explicitly stated</div></td>
 </tr>
 
 <!-- STATE AVAILABILITY -->
@@ -495,12 +533,13 @@ table.weight { margin-bottom: 1rem; }
   <td><div class="cell-val">17 states <span class="new-tag" style="display:inline-block;font-size:9px;padding:1px 5px;border-radius:3px;font-weight:700;background:#E8F5E9;color:#2E7D32;border:1px solid #A5D6A7;margin-left:4px;">UPDATED Aug 2026</span></div><div class="cell-note">AZ, CA, FL, ID, MO, MT, NJ, NV, OH, OR, PA, SC, TN, UT, VA, WA, WY.<br>Idaho, Missouri, Montana, and Wyoming added August 10, 2026 — expanding from 14 to 17 states. CEO Michael Gifford: "Our latest expansion allows us to help more homeowners access the equity in their homes." Note: Colorado appears in their license page but is not currently an active product state.</div><div class="src">PRNewswire August 10, 2026; HousingWire August 10, 2026 (primary sources)</div></td>
   <td><div class="cell-val">14 states <span class="new-tag" style="display:inline-block;font-size:9px;padding:1px 5px;border-radius:3px;font-weight:700;background:#E8F5E9;color:#2E7D32;border:1px solid #A5D6A7;margin-left:4px;">UPDATED</span></div><div class="cell-note">AZ, AR, CA, CO, FL, GA, KS, LA, MI, OK, OR, PA, SC, WA. Colorado recently added. North Carolina flagged for 2026 expansion. Raised $10M Series A (Dec 2025) led by Interlock Partners — positioned to issue first securitization in 2026. Note: our prior count of 12 states was outdated.</div><div class="src">themortgagereports.com Nada review June 2026; BusinessWire Dec 2026; topmoneyhub.com Aug 2026</div></td>
   <td><div class="cell-val">17 states + DC</div><div class="cell-note">AZ, CA, CO, FL, GA, IL, IN, MI, MO, NJ, NV, OH, PA, SC, TN, UT, WA + DC.</div><div class="src">jgwentworth.com/home-equity-cashout-faqs</div></td>
+  <td><div class="cell-val">24 states + DC</div><div class="cell-note">AZ, CA, DC, DE, FL, IN, KS, KY, MI, MN, MO, NE, NV, NJ, NM, NY, OH, OR, RI, SC, TN, UT, VA, WI. Founded 2004 — longest operating history in category. 10,000+ households served.</div><div class="src">unison.com/faqs/question/esa-available-states (primary source, confirmed)</div></td>
 </tr>
 
 <!-- REGULATORY -->
 <tr class="warn-row">
   <td>Regulatory environment <span class="compound-tag">industry-wide</span></td>
-  <td colspan="6"><div class="cell-val">⚖️ Home Equity Lending Integrity Act (S. 4803) — introduced June 17, 2026 by Senator Jeff Merkley</div><div class="cell-note">Proposes to amend the Truth in Lending Act (TILA) to classify home equity investments as residential mortgages, extending federal consumer protections to HEI/HEA products. Currently HEIs operate without a federal regulatory framework. The Coalition for Home Equity Partnership (CHEP) — of which Unlock, Point, and Hometap are members — has responded that shared equity products are not compatible with the definition of a traditional mortgage as they have no loan balance, interest rate, or monthly payments. State-level regulatory engagement is also increasing. This legislation, if passed, would significantly change how all six companies operate, originate, and disclose their products. Monitor closely.</div><div class="src">Money.com August 2026; Senator Merkley press release June 17, 2026</div></td>
+  <td colspan="7"><div class="cell-val">⚖️ Home Equity Lending Integrity Act (S. 4803) — introduced June 17, 2026 by Senator Jeff Merkley</div><div class="cell-note">Proposes to amend the Truth in Lending Act (TILA) to classify home equity investments as residential mortgages, extending federal consumer protections to HEI/HEA products. Currently HEIs operate without a federal regulatory framework. The Coalition for Home Equity Partnership (CHEP) — of which Unlock, Point, and Hometap are members — has responded that shared equity products are not compatible with the definition of a traditional mortgage as they have no loan balance, interest rate, or monthly payments. State-level regulatory engagement is also increasing. This legislation, if passed, would significantly change how all six companies operate, originate, and disclose their products. Monitor closely.</div><div class="src">Money.com August 2026; Senator Merkley press release June 17, 2026</div></td>
 </tr>
 
 </tbody>
@@ -745,8 +784,36 @@ table.weight { margin-bottom: 1rem; }
         <td><b>6th</b></td>
       </tr>
 
+      <!-- UNISON -->
+      <tr>
+        <td><div class="co-cell"><div class="co-dot" style="background:#00897B"></div><b>Unison</b></div><div class="note">ESA</div></td>
+        <td>
+          <span class="badge badge-5">5/5</span>
+          <div class="note">Soft pull only throughout entire process — including full application. Ongoing soft pulls during agreement. Directly matches Unlock's key differentiator. "This never means that we have used a hard credit pull." Confirmed from unison.com/faq primary source.</div>
+        </td>
+        <td>
+          <span class="badge badge-5">5/5</span>
+          <div class="note">30-year term — tied with Point for longest in category. No prepayment penalty. Can sell or settle at any time. Most flexible timeline for homeowners who don't want to think about settlement pressure.</div>
+        </td>
+        <td>
+          <span class="badge badge-3">3/5</span>
+          <div class="note">Share of change in value — neither universally better nor worse than share-of-value. 4× multiplier on appreciation only. 5% risk adjustment (far lower than Point's 27%). Genuine downside sharing after restriction period. <b>But: NO published annual cost cap</b> — in strong appreciation markets Unison's cost is uncapped, unlike every other company in this comparison. Deferred maintenance adjustment can also reduce downside sharing. Score reflects the cap absence as a significant consumer risk.</div>
+        </td>
+        <td>
+          <span class="badge badge-5">5/5</span>
+          <div class="note">3.9% origination — lowest of all seven companies. Unison pays credit report costs. However: home inspection required ($650–$1,050) in addition to appraisal — unique burden not charged by other companies. Net fee position is favorable but home inspection partially offsets the origination advantage.</div>
+        </td>
+        <td>
+          <span class="badge badge-1">1/5</span>
+          <div class="note">620 FICO minimum AND income verification required — most restrictive qualification bar of all seven companies. Up to 15% of home value (most restrictive access ceiling). 24 states + DC. No confirmed rental/investment property eligibility. Active 2026 litigation. 10,000+ homeowners served (smallest customer base of companies with disclosed figures). Narrowest credit box of the group by a significant margin.</div>
+        </td>
+        <td><span class="score score-3">3.20</span></td>
+        <td><b>4th</b>*<div class="note" style="font-size:9px;">*Tied area with Hometap/Point/Splitero — see note</div></td>
+      </tr>
+
     </tbody>
   </table>
+  <p class="note" style="margin-top:8px;font-size:10px;color:#666;">*Unison ranks 4th on weighted score (3.20) but this varies significantly by homeowner profile. For homeowners with 620+ FICO, strong income, and long time horizons, Unison's downside sharing and 30-year term are genuinely valuable. For homeowners with lower FICO, no income documentation, or need for larger access amounts, Unison may not be an option at all.</p>
 </div>
 
 <!-- SUMMARY RANKINGS -->
@@ -791,7 +858,14 @@ table.weight { margin-bottom: 1rem; }
     </div>
   </div>
 
-  <p class="disclaimer">This scorecard reflects publicly available product terms, underwriting guidelines (Unlock internal July 2026), and industry intelligence as of August 2026. Scores are the analytical judgment of Unlock Technologies based on the weighted factors above. Competitor product terms are sourced from primary brand websites where available and third-party reviews where noted. This document is for internal use only. Jim Riccitelli (CEO) and Peter Silberstein corrections applied to Point renovation credit and effective origination fee analysis.</p>
+  <div class="summary-card" style="border-top-color:#00897B;margin-bottom:1rem;">
+      <div class="rank-num">4th*</div>
+      <div class="rank-company" style="color:#00897B;">Unison — 3.20 / 5.00</div>
+      <div class="rank-score">BEST DOWNSIDE PROTECTION / LOWEST FEES</div>
+      <div class="rank-summary">Soft pull only (matches Unlock), lowest origination fee (3.9%), 30-year term, and genuine downside sharing are real consumer strengths. But the absence of a published annual cost cap is a significant risk in appreciation markets — no ceiling on what Unison can collect. The most restrictive qualification bar (620 FICO + income verification) means a large portion of the homeowner market cannot access this product. Active 2026 litigation is also a watch item. Best suited for financially stable homeowners with long time horizons.</div>
+  </div>
+
+  <p class="disclaimer">This scorecard reflects publicly available product terms, underwriting guidelines (Unlock internal July 2026), and industry intelligence as of August 2026. Scores are the analytical judgment of Unlock Technologies based on the weighted factors above. Competitor product terms are sourced from primary brand websites where available and third-party reviews where noted. This document is for internal use only. Jim Riccitelli (CEO) and Peter Silberstein corrections applied to Point renovation credit and effective origination fee analysis. Unison added August 2026 based on primary source research including unison.com/faq, unison.com/blog/unison-vs-unlock, and unison.com/faqs/question/esa-available-states.</p>
 </div>
 
 
