@@ -3,288 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unlock Product Guide | Home Equity Agreement (HEA)</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Unlock Product Guide | Complete Manual</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind Typography Plugin (Crucial for long-form PDF text formatting) -->
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        brand: {
-                            50: '#f0fdf4',
-                            100: '#dcfce7',
-                            600: '#16a34a',
-                            700: '#15803d',
-                            900: '#14532d',
-                        }
-                    }
+                    colors: { brand: { 50: '#f0fdf4', 100: '#dcfce7', 600: '#16a34a', 900: '#14532d' } }
                 }
             }
         }
     </script>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
+        /* Custom scrollbar for a cleaner documentation look */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f8fafc; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased">
+<body class="bg-white text-slate-800 antialiased h-screen flex overflow-hidden selection:bg-brand-100 selection:text-brand-900">
 
-    <!-- Header / Navigation -->
-    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="bg-brand-600 text-white p-2.5 rounded-xl font-bold text-xl tracking-tight">Unlock</div>
-                <div>
-                    <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 block">Product Guide</span>
-                    <span class="text-sm font-medium text-slate-700">August 2026 Version</span>
-                </div>
+    <!-- Sidebar Navigation -->
+    <aside class="w-72 bg-slate-50 border-r border-slate-200 h-full flex flex-col hidden md:flex flex-shrink-0">
+        <div class="p-6 border-b border-slate-200 bg-white">
+            <div class="bg-brand-600 text-white px-3 py-1.5 rounded-lg font-bold text-lg inline-block tracking-tight mb-2 shadow-sm">Unlock</div>
+            <h1 class="font-semibold text-slate-900 leading-tight">Product Guide</h1>
+            <p class="text-xs text-slate-500 mt-1 font-medium uppercase tracking-wider">August 2026 Version</p>
+        </div>
+        <nav class="flex-1 overflow-y-auto p-4 space-y-1">
+            <a href="#introduction" class="block px-3 py-2 text-sm font-medium text-slate-900 bg-slate-200/50 rounded-md">Introduction</a>
+            <a href="#knowledge-checklist" class="block px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-md transition-colors">Knowledge Checklist</a>
+            <div class="pt-5 pb-2">
+                <p class="px-3 text-xs font-bold text-slate-400 uppercase tracking-wider">Table of Contents</p>
             </div>
-            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-600">
-                <a href="#about" class="hover:text-brand-600 transition">About HEA</a>
-                <a href="#checklist" class="hover:text-brand-600 transition">Knowledge Checklist</a>
-                <a href="#focus" class="hover:text-brand-600 transition">Key Focus Areas</a>
-                <a href="#disclaimers" class="hover:text-brand-600 transition">Disclaimers</a>
-            </nav>
-            <div>
-                <a href="#checklist" class="bg-brand-600 text-white px-5 py-2.5 rounded-xl font-medium text-sm hover:bg-brand-700 transition shadow-sm">Review Guide</a>
+            <a href="#chapter-1" class="block px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-md transition-colors">1. The Foundation</a>
+            <a href="#chapter-2" class="block px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-md transition-colors">2. The Numbers</a>
+            <a href="#chapter-3" class="block px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-md transition-colors">3. Living With Your HEA</a>
+            <a href="#chapter-4" class="block px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-md transition-colors">4. Ending Your HEA</a>
+            <a href="#chapter-5" class="block px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-md transition-colors">5. Additional Details</a>
+            <div class="pt-5 pb-2">
+                <p class="px-3 text-xs font-bold text-slate-400 uppercase tracking-wider">Reference</p>
+            </div>
+            <a href="#appendix" class="block px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-md transition-colors">Appendix & Disclosures</a>
+        </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 overflow-y-auto h-full bg-white relative">
+        <!-- Mobile Header -->
+        <div class="md:hidden sticky top-0 bg-white border-b border-slate-200 p-4 z-10 flex justify-between items-center shadow-sm">
+            <div class="font-bold text-slate-900 flex items-center gap-2">
+                <span class="bg-brand-600 text-white px-2 py-0.5 rounded text-sm">Unlock</span> 
+                Product Guide
             </div>
         </div>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="relative overflow-hidden bg-gradient-to-b from-brand-900 via-brand-700 to-emerald-800 text-white py-24 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-5xl mx-auto text-center relative z-10">
-            <span class="inline-block bg-white/10 text-emerald-200 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-widest mb-6 border border-white/20">
-                Official Product Guide
-            </span>
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
-                Unlock Your Home Equity <br class="hidden sm:inline">Without Monthly Payments.
-            </h1>
-            <p class="text-lg sm:text-xl text-emerald-100 max-w-3xl mx-auto mb-10 font-light leading-relaxed">
-                Discover the Unlock Home Equity Agreement (HEA) — a flexible financial solution designed to give you cash up front with zero monthly payments for up to 10 years.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#about" class="bg-white text-brand-900 font-semibold px-8 py-3.5 rounded-xl shadow-lg hover:bg-emerald-50 transition">
-                    Learn How It Works
-                </a>
-                <a href="#checklist" class="bg-brand-600/50 text-white border border-white/30 font-semibold px-8 py-3.5 rounded-xl backdrop-blur hover:bg-brand-600 transition">
-                    View Knowledge Checklist
-                </a>
-            </div>
-        </div>
-    </section>
+        <div class="max-w-4xl mx-auto px-6 py-12 lg:px-16 xl:px-20">
+            
+            <!-- Document Body using Tailwind Typography (prose) for perfect reading styling -->
+            <article class="prose prose-slate prose-lg max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-brand-600 hover:prose-a:text-brand-700 prose-h2:mt-16 prose-h2:border-b prose-h2:pb-4 prose-h2:border-slate-100">
+                
+                <h1 id="introduction" class="text-4xl lg:text-5xl mb-8">Introduction</h1>
+                <p class="lead text-xl text-slate-600">Unlock is an innovative consumer finance company on a mission to help homeowners unlock the value of their biggest asset, their home equity, and to dramatically improve their lives by doing so.</p>
+                <p>The company was founded by respected real estate and finance veterans with deep experience in innovative consumer finance products. We offer an innovative home finance solution, called a <strong>Home Equity Agreement (HEA)</strong>.</p>
+                
+                <h3>What's The Catch?</h3>
+                <p>We get this question all the time. People wonder how we can offer homeowners money for up to 10 years with no monthly payments. Where does the money come from?</p>
+                <p>Put simply, <strong>there is no catch</strong>. The HEA is a new type of home finance that differs from traditional mortgage loans and home equity lines of credit. Those products require homeowners to make monthly payments based on a specified interest rate. Investors in those products find earning interest attractive. HEAs allow homeowners to defer the cost of the financing until settlement and then share a percentage of the home's value at that time. HEA investors find <em>that</em> attractive.</p>
 
-    <!-- About Section -->
-    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl mb-4">Introduction to the Unlock HEA</h2>
-            <div class="w-20 h-1.5 bg-brand-600 mx-auto rounded-full mb-6"></div>
-            <p class="text-lg text-slate-600">
-                Unlock is an innovative consumer finance company helping homeowners access the value of their biggest asset to dramatically improve their lives.
-            </p>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-            <div class="space-y-6">
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
-                    <h3 class="text-xl font-bold text-slate-900 mb-3 flex items-center">
-                        <span class="bg-brand-100 text-brand-700 w-8 h-8 rounded-lg inline-flex items-center justify-center mr-3 font-semibold text-sm">1</span>
-                        What is a Home Equity Agreement?
-                    </h3>
-                    <p class="text-slate-600 leading-relaxed">
-                        When your Unlock HEA closes, you receive a lump-sum cash payment. You can use the money for up to 10 years without interest charges or monthly payments. In exchange, Unlock receives a percentage of your home's value when you sell or buy us out.
-                    </p>
-                </div>
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
-                    <h3 class="text-xl font-bold text-slate-900 mb-3 flex items-center">
-                        <span class="bg-brand-100 text-brand-700 w-8 h-8 rounded-lg inline-flex items-center justify-center mr-3 font-semibold text-sm">2</span>
-                        What's The Catch?
-                    </h3>
-                    <p class="text-slate-600 leading-relaxed">
-                        Put simply, there is no catch. Unlike traditional loans requiring monthly interest payments, HEAs allow homeowners to defer financing costs until settlement by sharing in a percentage of the home's future value.
-                    </p>
-                </div>
-            </div>
-
-            <div class="bg-emerald-900 text-white p-8 sm:p-10 rounded-3xl shadow-xl space-y-6">
-                <h3 class="text-2xl font-bold">Freedom & Flexibility</h3>
-                <p class="text-emerald-100 leading-relaxed">
-                    Imagine paying off high-interest debt, funding home renovations, securing long-term care insurance, or paying for college—all without monthly payments.
-                </p>
-                <ul class="space-y-4 text-emerald-100 text-sm">
-                    <li class="flex items-start">
-                        <svg class="w-5 h-5 text-emerald-400 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        <span>No monthly payments for up to 10 years</span>
-                    </li>
-                    <li class="flex items-start">
-                        <svg class="w-5 h-5 text-emerald-400 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        <span>You control when your HEA ends (sell or buy out)</span>
-                    </li>
-                    <li class="flex items-start">
-                        <svg class="w-5 h-5 text-emerald-400 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        <span>Comprehensive customer education & transparency</span>
-                    </li>
+                <h2 id="knowledge-checklist">Knowledge Checklist</h2>
+                <p>Education is a key part of who we are as a company and it is a required step in our process. Before closing your transaction, please review the following foundational concepts:</p>
+                <ul>
+                    <li><strong>HEA Basics:</strong> We establish a <em>Starting Home Value</em> via appraisal. You receive a lump sum upfront. You make no monthly payments and settle up anytime within a 10-year term based on the <em>Ending Home Value</em>.</li>
+                    <li><strong>The Multiplier:</strong> A multiplier determines Unlock's percentage at the end (typically 1.8x). For example, if you receive 10% of the Starting Home Value up front, Unlock receives 18% of the Ending Home Value.</li>
+                    <li><strong>Cost Limits:</strong> The gross cost is capped by the <em>Annualized Cost Limit</em>, typically 19.9%.</li>
+                    <li><strong>Property Use:</strong> Pricing varies between principal residences, second homes, and investment properties due to risk factors. Converting property use during the term triggers pricing adjustments.</li>
+                    <li><strong>Improvement Adjustments:</strong> If you make significant home improvements that increase your home's value, you can request an adjustment to lower the Ending Home Value so Unlock doesn't share in the added value you paid for.</li>
                 </ul>
-            </div>
-        </div>
-    </section>
 
-    <!-- Knowledge Checklist Section -->
-    <section id="checklist" class="py-20 bg-slate-100 border-y border-slate-200 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-brand-700 font-semibold text-sm uppercase tracking-wider">Essential Summary</span>
-                <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl mt-2 mb-4">Knowledge Checklist</h2>
-                <div class="w-20 h-1.5 bg-brand-600 mx-auto rounded-full mb-6"></div>
-                <p class="text-lg text-slate-600">
-                    Review these key foundational concepts and terms before entering into an Unlock HEA.
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Card 1 -->
-                <div class="bg-white p-7 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between">
-                    <div>
-                        <div class="text-brand-600 font-bold text-lg mb-2">HEA Basics</div>
-                        <p class="text-slate-600 text-sm leading-relaxed">
-                            Established via Starting Home Value (appraisal). Unlock gives you a lump-sum cash payment. You maintain the funds for up to 10 years with no monthly payments. Unlock receives a percentage (determined by a multiplier, typically 1.8x) of the Ending Home Value at settlement.
-                        </p>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-slate-100 text-xs font-semibold text-slate-400 uppercase tracking-wider">Foundation</div>
+                <h2 id="chapter-1">Chapter 1: The Foundation</h2>
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-6 my-8 rounded-r-lg not-prose">
+                    <h4 class="text-blue-900 font-bold mb-1">Developer Note: Paste PDF Text Here</h4>
+                    <p class="text-sm text-blue-800">Copy the contents of "Chapter 1: The Foundation" (Pages 7-14) from your PDF and paste them into this HTML block.</p>
                 </div>
+                <p>In this chapter, the core mechanics of establishing the Starting Home Value, appraisals, and the initial lump-sum distribution are defined...</p>
 
-                <!-- Card 2 -->
-                <div class="bg-white p-7 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between">
-                    <div>
-                        <div class="text-brand-600 font-bold text-lg mb-2">How Much Will You Pay?</div>
-                        <p class="text-slate-600 text-sm leading-relaxed">
-                            Cost depends on home value changes and term length. Expressed as Unlock Share (lump-sum payment at end) or Annualized Cost. Capped by the Annualized Cost Limit (typically 19.9% max).
-                        </p>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-slate-100 text-xs font-semibold text-slate-400 uppercase tracking-wider">The Numbers</div>
+                <h2 id="chapter-2">Chapter 2: The Numbers</h2>
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-6 my-8 rounded-r-lg not-prose">
+                    <h4 class="text-blue-900 font-bold mb-1">Developer Note: Paste PDF Text Here</h4>
+                    <p class="text-sm text-blue-800">Copy the contents of "Chapter 2: The Numbers" (Pages 15-18) from your PDF and paste them into this HTML block.</p>
                 </div>
-
-                <!-- Card 3 -->
-                <div class="bg-white p-7 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between">
-                    <div>
-                        <div class="text-brand-600 font-bold text-lg mb-2">Controlling Share Size</div>
-                        <p class="text-slate-600 text-sm leading-relaxed">
-                            Subject to minimum transaction sizes, you can choose a lower amount of cash up front to reduce Unlock's future share of your home's appreciation.
-                        </p>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-slate-100 text-xs font-semibold text-slate-400 uppercase tracking-wider">Flexibility</div>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="bg-white p-7 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between">
-                    <div>
-                        <div class="text-brand-600 font-bold text-lg mb-2">Property Types</div>
-                        <p class="text-slate-600 text-sm leading-relaxed">
-                            Pricing varies for principal residences, second homes, and investment properties due to risk factors. Converting property use during the term triggers pricing adjustments.
-                        </p>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-slate-100 text-xs font-semibold text-slate-400 uppercase tracking-wider">Usage</div>
-                </div>
-
-                <!-- Card 5 -->
-                <div class="bg-white p-7 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between">
-                    <div>
-                        <div class="text-brand-600 font-bold text-lg mb-2">Improvement Adjustments</div>
-                        <p class="text-slate-600 text-sm leading-relaxed">
-                            If you make significant home improvements that increase your home's value, you can request an adjustment to lower the Ending Home Value so Unlock doesn't share in your added value.
-                        </p>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-slate-100 text-xs font-semibold text-slate-400 uppercase tracking-wider">Equity Protection</div>
-                </div>
-
-                <!-- Card 6 -->
-                <div class="bg-white p-7 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between">
-                    <div>
-                        <div class="text-brand-600 font-bold text-lg mb-2">Fees & Expenses</div>
-                        <p class="text-slate-600 text-sm leading-relaxed">
-                            At start: third-party transaction expenses + 4.9% Origination Fee (typical). At end: closing costs, appraisal, and realtor commissions.
-                        </p>
-                    </div>
-                    <div class="mt-6 pt-4 border-t border-slate-100 text-xs font-semibold text-slate-400 uppercase tracking-wider">Costs</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Key Focus Areas & Requirements -->
-    <section id="focus" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div class="grid lg:grid-cols-2 gap-12">
-            <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 space-y-6">
-                <h3 class="text-2xl font-bold text-slate-900">Important Homeowner Requirements</h3>
-                <p class="text-slate-600 text-sm leading-relaxed">
-                    During the term of your Unlock HEA, you agree to fulfill key responsibilities to maintain your agreement in good standing:
-                </p>
-                <ul class="space-y-4 text-slate-700 text-sm">
-                    <li class="flex items-start">
-                        <span class="bg-brand-100 text-brand-700 p-1 rounded mr-3 mt-0.5">✓</span>
-                        <span>Stay current on monthly mortgage loan payments, property taxes, and property insurance.</span>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="bg-brand-100 text-brand-700 p-1 rounded mr-3 mt-0.5">✓</span>
-                        <span>Maintain your home in proper working order and good condition (normal wear & tear excepted).</span>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="bg-brand-100 text-brand-700 p-1 rounded mr-3 mt-0.5">✓</span>
-                        <span>Inform Unlock of major property or financial changes.</span>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="bg-brand-100 text-brand-700 p-1 rounded mr-3 mt-0.5">✓</span>
-                        <span>Settle or end the HEA on or before its 10-year maximum term anniversary.</span>
-                    </li>
+                <p>The cost of your Unlock HEA is unknown up front because it depends on changes in your home's value and the length of time you keep your HEA. Key financial concepts include:</p>
+                <ul>
+                    <li><strong>The Unlock Share:</strong> The lump-sum dollar payment you make at settlement.</li>
+                    <li><strong>Annualized Cost:</strong> A percentage rate useful for comparing the gross cost of an HEA to traditional loan interest.</li>
+                    <li><strong>Origination Fee:</strong> Typically 4.9% of the cash you receive from us.</li>
                 </ul>
-            </div>
 
-            <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 space-y-6">
-                <h3 class="text-2xl font-bold text-slate-900">Liens & Defaults</h3>
-                <p class="text-slate-600 text-sm leading-relaxed">
-                    Unlock holds a lien on your property during the term. While foreclosure is always a last resort and homeowners are given time to cure issues, defaults include:
-                </p>
-                <ul class="space-y-4 text-slate-700 text-sm">
-                    <li class="flex items-start">
-                        <span class="bg-red-100 text-red-700 p-1 rounded mr-3 mt-0.5">!</span>
-                        <span>Falling behind on housing obligations (mortgage, taxes, insurance).</span>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="bg-red-100 text-red-700 p-1 rounded mr-3 mt-0.5">!</span>
-                        <span>Taking on unapproved debt in violation of the HEA terms.</span>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="bg-red-100 text-red-700 p-1 rounded mr-3 mt-0.5">!</span>
-                        <span>Failing to end the HEA at the end of the 10-year term.</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer & Disclaimers -->
-    <footer id="disclaimers" class="bg-slate-900 text-slate-400 py-16 px-4 sm:px-6 lg:px-8 border-t border-slate-800 text-xs leading-relaxed">
-        <div class="max-w-7xl mx-auto space-y-6">
-            <div class="flex flex-col md:flex-row justify-between items-center border-b border-slate-800 pb-8 gap-4">
-                <div class="text-white font-bold text-xl tracking-tight">Unlock Product Guide</div>
-                <div class="flex space-x-6 text-sm">
-                    <a href="https://www.unlock.com" target="_blank" class="hover:text-white transition">Unlock.com</a>
-                    <a href="https://www.unlock.com/licensing/" target="_blank" class="hover:text-white transition">Licensing Information</a>
+                <h2 id="chapter-3">Chapter 3: Living With Your Unlock HEA</h2>
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-6 my-8 rounded-r-lg not-prose">
+                    <h4 class="text-blue-900 font-bold mb-1">Developer Note: Paste PDF Text Here</h4>
+                    <p class="text-sm text-blue-800">Copy the contents of "Chapter 3: Living With Your Unlock HEA" (Pages 19-24) from your PDF and paste them into this HTML block.</p>
                 </div>
-            </div>
-            <p>
-                The examples in this product guide are for illustration only. Terms offered in a specific Unlock HEA may differ. Pricing and important terms will vary and are determined during underwriting. Receipt of this guide is not a commitment to enter into a transaction.
-            </p>
-            <p>
-                Unlock Home Equity Agreements are provided exclusively by Unlock Home Equity Solutions Inc. (NMLS #2657081), and/or its affiliates including Unlock Partnership Solutions Inc., Unlock Partnership Solutions AO1 Inc., and Unlock Homeownership Solutions Inc., each a wholly-owned subsidiary of Unlock Technologies, Inc.
-            </p>
-            <p class="text-slate-500 text-center pt-8 border-t border-slate-800">
-                &copy; 2026 Unlock Technologies, Inc. All Rights Reserved. Built from the August 2026 Product Guide PDF.
-            </p>
+                <h3>Homeowner Responsibilities</h3>
+                <p>During the 10-year term, you must stay current on housing obligations (mortgage, property taxes, insurance), maintain the home in proper working order (subject to normal wear and tear), and inform Unlock of any major property or financial changes.</p>
+                <h3>Maintenance Adjustment</h3>
+                <p>If you fail to maintain your home in proper working order, and your home's value is significantly lower at the time of settlement as a result, Unlock may make a Maintenance Adjustment which increases the Ending Home Value for calculation purposes so Unlock does not share in a loss caused by improper maintenance.</p>
+
+                <h2 id="chapter-4">Chapter 4: Ending Your Unlock HEA</h2>
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-6 my-8 rounded-r-lg not-prose">
+                    <h4 class="text-blue-900 font-bold mb-1">Developer Note: Paste PDF Text Here</h4>
+                    <p class="text-sm text-blue-800">Copy the contents of "Chapter 4: Ending Your Unlock HEA" (Pages 25-30) from your PDF and paste them into this HTML block.</p>
+                </div>
+                <p>You are in control of when your HEA ends, whether through a home sale, a full buyout, or partial buyouts, up to the 10-year maturity date. Default events (like taking on unapproved debt, failing to pay taxes, or bankruptcy) can trigger early termination or foreclosure.</p>
+
+                <h2 id="chapter-5">Chapter 5: Additional Details</h2>
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-6 my-8 rounded-r-lg not-prose">
+                    <h4 class="text-blue-900 font-bold mb-1">Developer Note: Paste PDF Text Here</h4>
+                    <p class="text-sm text-blue-800">Copy the contents of "Chapter 5: Additional Details" (Pages 31+) from your PDF and paste them into this HTML block.</p>
+                </div>
+
+                <h2 id="appendix">Appendix & Disclosures</h2>
+                <p class="text-sm text-slate-500 leading-relaxed">
+                    The examples in this product guide are for the purpose of illustration only. The terms offered in a specific Unlock HEA may be materially different from the examples provided in this Product Guide. Pricing and other important terms will vary. Your actual terms will be determined during the underwriting of your application.
+                    <br><br>
+                    Unlock Home Equity Agreements are provided exclusively by Unlock Home Equity Solutions Inc. (NMLS #2657081), and/or its affiliates including Unlock Partnership Solutions Inc., Unlock Partnership Solutions AO1 Inc., and Unlock Homeownership Solutions Inc., each of which is a wholly-owned subsidiary of Unlock Technologies, Inc. (collectively, “Unlock”). The applicable Unlock entity enters into the Unlock Home Equity Agreement directly with consumers and does not act as an agent or broker on behalf of any third-party.
+                </p>
+
+            </article>
+
+            <!-- Footer -->
+            <footer class="mt-24 pt-8 border-t border-slate-200 text-sm text-slate-500 flex flex-col md:flex-row justify-between items-center pb-12">
+                <span class="mb-4 md:mb-0">© 2026 Unlock Technologies, Inc. All Rights Reserved.</span>
+                <a href="#introduction" class="hover:text-brand-600 font-medium transition-colors">Back to top &uarr;</a>
+            </footer>
         </div>
-    </footer>
+    </main>
 
 </body>
 </html>
